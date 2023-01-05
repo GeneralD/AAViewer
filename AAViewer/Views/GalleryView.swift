@@ -16,9 +16,16 @@ struct GalleryView: View {
 	
 	var body: some View {
 		if galleryModel.items.isEmpty {
-			Button("Open Folder") {
+			Button {
 				galleryModel.openDirectoryPicker()
-			}.buttonStyle(.borderless)
+			} label: {
+				HStack {
+					Image(systemName: "folder.fill")
+					Text("Open Folder")
+				}
+				.padding(.all, 4)
+			}
+			.buttonStyle(.plain)
 		}
 		else {
 			ScrollView(settingModel.galleryScrollAxis) {
