@@ -10,7 +10,7 @@ import Kingfisher
 import SwiftUI
 import WaterfallGrid
 
-struct ContentView: View {
+struct GalleryView: View {
 	
 	@ObservedObject var galleryModel = GalleryModel()
 	@ObservedObject var settingModel = SettingModel()
@@ -44,6 +44,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+		GalleryView()
 	}
 }

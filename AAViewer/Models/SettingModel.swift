@@ -27,6 +27,12 @@ class SettingModel: ObservableObject {
 		}
 	}
 
+	@Published var showGalleryRightInspector = Defaults.showGalleryRightInspector {
+		didSet(value) {
+			Defaults.showGalleryRightInspector = value
+		}
+	}
+
 	func increaseGalleryColumn() {
 		guard galleryColumns < 20 else { return }
 		galleryColumns += 1
@@ -46,6 +52,7 @@ private extension DefaultsKeys {
 	var galleryScrollAxis: DefaultsKey<Axis.Set> { .init("galleryScrollAxis", defaultValue: .horizontal) }
 	var galleryColumns: DefaultsKey<Int> { .init("galleryColumns", defaultValue: 2) }
 	var showPrompt: DefaultsKey<Bool> { .init("showPrompt", defaultValue: true) }
+	var showGalleryRightInspector: DefaultsKey<Bool> { .init("showGalleryRightInspector", defaultValue: false) }
 }
 
 extension Axis.Set: DefaultsSerializable {}

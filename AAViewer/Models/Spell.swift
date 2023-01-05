@@ -5,17 +5,16 @@
 //  Created by Yumenosuke Koukata on 2023/01/05.
 //
 
-public struct Spell: Equatable {
-	public let phrase: String
-	public let enhanced: Int
+struct Spell: Equatable, Hashable {
+	let phrase: String
+	let enhanced: Int
+}
+
+extension Spell: Identifiable {
+	var id: Int { hashValue }
 }
 
 extension Spell {
-	static let inBracesRegex = #/^\{(?<match>.+)\}$/#
-	static let inBracketsRegex = #/^\[(?<match>.+)\]$/#
-	static let inParenthesesRegex = #/^\((?<match>.+)\)$/#
-	static let cleanerRegex = #/^[\{\[\(]*(?<match>.+?)[\}\]\)]*$/#
-
 	static func from(_ str: String) -> Self {
 		func reduce(_ base: Self) -> Self {
 			// peel off braces
@@ -38,4 +37,11 @@ extension Spell {
 		}
 		return reduce(.init(phrase: str, enhanced: .zero))
 	}
+}
+
+private extension Spell {
+	static let inBracesRegex = #/^\{(?<match>.+)\}$/#
+	static let inBracketsRegex = #/^\[(?<match>.+)\]$/#
+	static let inParenthesesRegex = #/^\((?<match>.+)\)$/#
+	static let cleanerRegex = #/^[\{\[\(]*(?<match>.+?)[\}\]\)]*$/#
 }

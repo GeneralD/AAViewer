@@ -14,7 +14,7 @@ struct AAViewerApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			ContentView(galleryModel: galleryModel, settingModel: settingModel)
+			GalleryView(galleryModel: galleryModel, settingModel: settingModel)
 		}.commands {
 			CommandGroup(after: .newItem) {
 				Divider()
@@ -25,7 +25,7 @@ struct AAViewerApp: App {
 			}
 			CommandGroup(after: .sidebar) {
 				Button(settingModel.showPrompt ? "Hide Prompt" : "Show Prompt") {
-					settingModel.showPrompt = !settingModel.showPrompt
+					settingModel.showPrompt.toggle()
 				}
 				.keyboardShortcut("p", modifiers: [.command, .option])
 				Divider()

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = B36B219929669E6800E47DFE /* SwiftyUserDefaults */; };
 		B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633C2965CCFA001851FD /* AAViewerApp.swift */; };
-		B38C633F2965CCFA001851FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633E2965CCFA001851FD /* ContentView.swift */; };
+		B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633E2965CCFA001851FD /* GalleryView.swift */; };
 		B38C63412965CD0A001851FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38C63402965CD0A001851FD /* Assets.xcassets */; };
 		B38C63442965CD0A001851FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38C63432965CD0A001851FD /* Preview Assets.xcassets */; };
 		B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C63502965D6D6001851FD /* GalleryModel.swift */; };
@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		B38C63392965CCFA001851FD /* AAViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38C633C2965CCFA001851FD /* AAViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAViewerApp.swift; sourceTree = "<group>"; };
-		B38C633E2965CCFA001851FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B38C633E2965CCFA001851FD /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		B38C63402965CD0A001851FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B38C63432965CD0A001851FD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B38C63452965CD0A001851FD /* AAViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AAViewer.entitlements; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		B3F0C9222965FF3A00C8B6BD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B38C633E2965CCFA001851FD /* ContentView.swift */,
+				B38C633E2965CCFA001851FD /* GalleryView.swift */,
 				B3F0C9232965FF4800C8B6BD /* SpellsView.swift */,
 			);
 			path = Views;
@@ -198,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */,
-				B38C633F2965CCFA001851FD /* ContentView.swift in Sources */,
+				B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */,
 				B3F0C926296605E100C8B6BD /* NSColor+Extension.swift in Sources */,
 				B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */,
 				B3A67775296674590028579C /* SettingModel.swift in Sources */,
