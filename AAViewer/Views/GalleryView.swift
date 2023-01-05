@@ -11,7 +11,6 @@ import SwiftUI
 import WaterfallGrid
 
 struct GalleryView: View {
-	
 	@ObservedObject var galleryModel = GalleryModel()
 	@ObservedObject var settingModel = SettingModel()
 	
@@ -42,7 +41,7 @@ struct GalleryView: View {
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct GalleryView_Previews: PreviewProvider {
 	static var previews: some View {
 		GalleryView()
 	}
