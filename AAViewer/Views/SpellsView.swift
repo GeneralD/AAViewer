@@ -5,44 +5,59 @@
 //  Created by Yumenosuke Koukata on 2023/01/05.
 //
 
-import Combine
-import Foundation
 import SwiftUI
 
 struct SpellsView: View {
-	@State var spells: [Spell] = []
+	@State var spells: [Spell]
 
 	var body: some View {
-		Text(spells
-			.sorted { rhs, lhs in
-				rhs.enhanced > lhs.enhanced
-			}
-			.reduce(into: AttributedString(), { accum, spell in
-				accum.append(AttributedString(spell.phrase, attributes: .init([
-					.font: NSFont.systemFont(ofSize: .maximum(8, 12 + CGFloat(spell.enhanced * 2))),
-					.foregroundColor: NSColor.white,
-					.backgroundColor: NSColor(seed: spell.phrase),
-				])))
-				guard spells.last != spell else {
-					accum.append(AttributedString(" "))
-					return
-				}
-				accum.append(AttributedString("   "))
-			}))
-	}
+		var width = CGFloat.zero
+		var height = CGFloat.zero
 
-	private func item(for text: String) -> some View {
-		Text(text)
-			.padding(.all, 5)
-			.font(.footnote)
-			.background(Color.blue)
-			.foregroundColor(Color.white)
-			.cornerRadius(30)
+		return ZStack(alignment: .topLeading) {
+			ForEach(spells, id: \.self) { spell in
+				Text(spell.phrase)
+					.padding(.all, 4)
+					.font(.system(size: 12 * pow(1.2, CGFloat(spell.enhanced))))
+					.background(Color(seed: spell.phrase))
+					.foregroundColor(.white)
+					.cornerRadius(30)
+					.padding(.all, 4)
+					.alignmentGuide(.leading, computeValue: { d in
+						if abs(width - d.width) > 330 {
+							width = 0
+							height -= d.height
+						}
+						let result = width
+						if spell == spells.last {
+							width = 0
+						} else {
+							width -= d.width
+						}
+						return result
+					})
+					.alignmentGuide(.top, computeValue: { _ in
+						let result = height
+						if spell == spells.last {
+							height = 0
+						}
+						return result
+					})
+			}
+		}
 	}
 }
 
 struct SpellsView_Previews: PreviewProvider {
 	static var previews: some View {
-		SpellsView()
+		SpellsView(spells: [
+			.init(phrase: "Bar", enhanced: 3),
+			.init(phrase: "Foo", enhanced: 2),
+			.init(phrase: "Bar", enhanced: 1),
+			.init(phrase: "Foo", enhanced: 0),
+			.init(phrase: "Bar", enhanced: -1),
+			.init(phrase: "Foo", enhanced: -2),
+			.init(phrase: "Bar", enhanced: -3),
+		])
 	}
 }

@@ -5,8 +5,6 @@
 //  Created by Yumenosuke Koukata on 2023/01/05.
 //
 
-import Combine
-import Foundation
 import SwiftUI
 import SwiftyUserDefaults
 

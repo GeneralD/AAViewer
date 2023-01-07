@@ -1,16 +1,15 @@
 //
-//  ColorHash.swift
+//  Color+Extension.swift
 //  Snippets
 //
 //  Created by Yumenosuke Koukata on 2023/01/05.
 //  Copyright © 2023 ZYXW. All rights reserved.
 //
 
-import AppKit
-import Foundation
+import SwiftUI
 
-extension NSColor {
-	convenience init(seed: String) {
+extension Color {
+	init(seed: String) {
 		let values = [0.35, 0.5, 0.65]
 
 		let full: CGFloat = 360
@@ -30,6 +29,6 @@ extension NSColor {
 		let saturation = values[Int(bkdrHash.truncatingRemainder(dividingBy: CGFloat(values.count)))]
 		let brightness = values[Int((bkdrHash / CGFloat(values.count)).truncatingRemainder(dividingBy: CGFloat(values.count)))]
 
-		self.init(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+		self.init(hue: hue, saturation: saturation, brightness: brightness, opacity: 1)
 	}
 }

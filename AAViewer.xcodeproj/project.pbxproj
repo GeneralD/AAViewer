@@ -19,7 +19,7 @@
 		B3A67775296674590028579C /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A67774296674590028579C /* SettingModel.swift */; };
 		B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C91C2965FB3200C8B6BD /* Spell.swift */; };
 		B3F0C9242965FF4800C8B6BD /* SpellsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C9232965FF4800C8B6BD /* SpellsView.swift */; };
-		B3F0C926296605E100C8B6BD /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C925296605E100C8B6BD /* NSColor+Extension.swift */; };
+		B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C925296605E100C8B6BD /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		B3A67774296674590028579C /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		B3F0C91C2965FB3200C8B6BD /* Spell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spell.swift; sourceTree = "<group>"; };
 		B3F0C9232965FF4800C8B6BD /* SpellsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellsView.swift; sourceTree = "<group>"; };
-		B3F0C925296605E100C8B6BD /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
+		B3F0C925296605E100C8B6BD /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 		B3F0C927296605E800C8B6BD /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B3F0C925296605E100C8B6BD /* NSColor+Extension.swift */,
+				B3F0C925296605E100C8B6BD /* Color+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 			files = (
 				B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */,
 				B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */,
-				B3F0C926296605E100C8B6BD /* NSColor+Extension.swift in Sources */,
+				B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */,
 				B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */,
 				B3A67775296674590028579C /* SettingModel.swift in Sources */,
 				B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */,
