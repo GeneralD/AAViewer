@@ -13,6 +13,8 @@ import WaterfallGrid
 struct GalleryView: View {
 	@ObservedObject var galleryModel = GalleryModel()
 	@ObservedObject var settingModel = SettingModel()
+
+	@State private var hoveringID: GalleryItem.ID?
 	
 	var body: some View {
 		if galleryModel.items.isEmpty {
@@ -23,22 +25,28 @@ struct GalleryView: View {
 					Image(systemName: "folder.fill")
 					Text("Open Folder")
 				}
-				.padding(.all, 4)
+				.padding(.all, 16)
 			}
-			.buttonStyle(.plain)
 		}
 		else {
 			ScrollView(settingModel.galleryScrollAxis) {
 				WaterfallGrid(galleryModel.items) { item in
-					VStack {
-						KFImage(item.url)
-							.resizable()
-							.aspectRatio(contentMode: .fit)
-						if settingModel.showPrompt, !item.spells.isEmpty {
-							SpellsView(spells: item.spells)
+					KFImage(item.url)
+						.resizable()
+						.aspectRatio(contentMode: .fit)
+						.overlay {
+							if item.id == hoveringID, !item.spells.isEmpty {
+								SpellsView(spells: item.spells)
+							}
 						}
-					}
-					.cornerRadius(8)
+						.cornerRadius(8)
+						.onHover { hovering in
+							guard hovering else {
+								hoveringID = nil
+								return
+							}
+							hoveringID = item.id
+						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
 				.gridStyle(columns: settingModel.galleryColumns)

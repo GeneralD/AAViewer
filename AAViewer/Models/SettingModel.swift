@@ -21,11 +21,6 @@ class SettingModel: ObservableObject {
 			Defaults.galleryColumns = value
 		}
 	}
-	@Published var showPrompt = Defaults.showPrompt {
-		didSet(value) {
-			Defaults.showPrompt = value
-		}
-	}
 
 	@Published var showGalleryRightInspector = Defaults.showGalleryRightInspector {
 		didSet(value) {
@@ -51,7 +46,6 @@ class SettingModel: ObservableObject {
 private extension DefaultsKeys {
 	var galleryScrollAxis: DefaultsKey<Axis.Set> { .init("galleryScrollAxis", defaultValue: .horizontal) }
 	var galleryColumns: DefaultsKey<Int> { .init("galleryColumns", defaultValue: 2) }
-	var showPrompt: DefaultsKey<Bool> { .init("showPrompt", defaultValue: true) }
 	var showGalleryRightInspector: DefaultsKey<Bool> { .init("showGalleryRightInspector", defaultValue: false) }
 }
 

@@ -24,11 +24,6 @@ struct AAViewerApp: App {
 				.keyboardShortcut("o", modifiers: .command)
 			}
 			CommandGroup(after: .sidebar) {
-				Button(settingModel.showPrompt ? "Hide Prompt" : "Show Prompt") {
-					settingModel.showPrompt.toggle()
-				}
-				.keyboardShortcut("p", modifiers: [.command, .option])
-				Divider()
 				Menu("Scroll Direction") {
 					Button("Horizontal") {
 						settingModel.galleryScrollAxis = .horizontal
