@@ -12,7 +12,10 @@ import Foundation
 
 class GalleryModel: ObservableObject {
 	@Published private(set) var folderURL: URL?
-	@Published private(set) var items: [GalleryItem] = []
+	@Published private(set) var filteredItems: [GalleryItem] = []
+
+	@Published var textFilter: String?
+	@Published var spellsFilter: [Spell] = []
 
 	private var cancellables = Set<AnyCancellable>()
 
@@ -33,23 +36,28 @@ extension GalleryModel {
 
 private extension GalleryModel {
 	func configureBindings() {
-		let manager = FileManager.default
-		let imageExtensions = ["jpg", "jpeg", "png", "gif"]
-
 		$folderURL
 			.compactMap { $0 }
-			.tryMap { url in try manager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) }
-			.map { urls in urls
-					.filter { url in imageExtensions.contains(url.pathExtension.lowercased()) }
-					.map { url in GalleryItem(url: url, spells: prompt(from: url).flatMap(spells(from:)) ?? []) }
-			}
+			.compactMap(loadGalleryItems(from:))
+			.combineLatest($textFilter, $spellsFilter, filtered(items: text: spells:))
+			.subscribe(on: DispatchQueue.global())
 			.receive(on: DispatchQueue.main)
-			.sink { _ in } receiveValue: { [weak self] items in
-				self?.items = items
-			}
-			.store(in: &cancellables)
+			.assign(to: &$filteredItems)
 	}
 }
+
+private func loadGalleryItems(from url: URL) -> [GalleryItem]? {
+	let manager = FileManager.default
+	let imageExtensions = ["jpg", "jpeg", "png", "gif"]
+	guard let fileUrls = try? manager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) else { return nil }
+	return fileUrls
+		.filter { url in imageExtensions.contains(url.pathExtension.lowercased()) }
+		.map { url in
+			let prompt = prompt(from: url)
+			return GalleryItem(url: url, spells: prompt.flatMap(spells(from:)) ?? [], originalPrompt: prompt ?? "")
+		}
+}
+
 
 private func prompt(from url: URL) -> String? {
 	guard let image = CIImage(contentsOf: url),
@@ -70,4 +78,15 @@ private func spells(from prompt: String) -> [Spell] {
 			}
 			accum.append(spell)
 		}
+}
+
+private func filtered(items: [GalleryItem], text: String? = nil, spells: [Spell] = []) -> [GalleryItem] {
+	let filterSpells = Set(spells.map(\.phrase))
+	return items.filter { item in
+		guard filterSpells.isSubset(of: item.spells.map(\.phrase)) else { return false }
+		guard let text else { return true }
+		guard item.url.lastPathComponent.contains(text) else { return false }
+		guard item.originalPrompt.contains(text) else { return false }
+		return true
+	}
 }

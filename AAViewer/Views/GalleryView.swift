@@ -16,7 +16,7 @@ struct GalleryView: View {
 	@State private var hoveringID: GalleryItem.ID?
 	
 	var body: some View {
-		if galleryModel.items.isEmpty {
+		if galleryModel.filteredItems.isEmpty {
 			Button {
 				galleryModel.openDirectoryPicker()
 			} label: {
@@ -29,7 +29,7 @@ struct GalleryView: View {
 		}
 		else {
 			ScrollView(settingModel.galleryScrollAxis) {
-				WaterfallGrid(galleryModel.items) { item in
+				WaterfallGrid(galleryModel.filteredItems) { item in
 					KFImage(item.url)
 						.resizable()
 						.aspectRatio(contentMode: .fit)

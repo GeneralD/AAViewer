@@ -10,6 +10,7 @@ import Foundation
 struct GalleryItem {
 	let url: URL
 	let spells: [Spell]
+	let originalPrompt: String
 }
 
 extension GalleryItem: Identifiable {
