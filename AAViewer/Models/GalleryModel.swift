@@ -14,8 +14,8 @@ class GalleryModel: ObservableObject {
 	@Published private(set) var folderURL: URL?
 	@Published private(set) var filteredItems: [GalleryItem] = []
 
-	@Published var textFilter: String?
-	@Published var spellsFilter: [Spell] = []
+	@Published var textFilter: String = ""
+	@Published var spellsFilter: Set<String> = .init()
 
 	private var cancellables = Set<AnyCancellable>()
 
@@ -80,13 +80,11 @@ private func spells(from prompt: String) -> [Spell] {
 		}
 }
 
-private func filtered(items: [GalleryItem], text: String? = nil, spells: [Spell] = []) -> [GalleryItem] {
-	let filterSpells = Set(spells.map(\.phrase))
+private func filtered(items: [GalleryItem], text: String, spells: Set<String>) -> [GalleryItem] {
 	return items.filter { item in
-		guard filterSpells.isSubset(of: item.spells.map(\.phrase)) else { return false }
-		guard let text else { return true }
-		guard item.url.lastPathComponent.contains(text) else { return false }
-		guard item.originalPrompt.contains(text) else { return false }
+		guard spells.isSubset(of: item.spells.map(\.phrase)) else { return false }
+		guard !text.isEmpty else { return true }
+		guard item.url.lastPathComponent.contains(text) || item.originalPrompt.contains(text) else { return false }
 		return true
 	}
 }

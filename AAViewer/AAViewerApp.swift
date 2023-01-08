@@ -14,8 +14,14 @@ struct AAViewerApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			GalleryView(galleryModel: galleryModel, settingModel: settingModel)
-		}.commands {
+			VStack {
+				SpellsView(spells: galleryModel.spellsFilter)
+				GalleryView(galleryModel: galleryModel, settingModel: settingModel)
+					.searchable(text: $galleryModel.textFilter)
+			}
+		}
+		.windowStyle(.hiddenTitleBar)
+		.commands {
 			CommandGroup(after: .newItem) {
 				Divider()
 				Button("Open...") {

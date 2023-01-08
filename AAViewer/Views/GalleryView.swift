@@ -34,8 +34,11 @@ struct GalleryView: View {
 						.resizable()
 						.aspectRatio(contentMode: .fit)
 						.overlay {
-							if item.id == hoveringID, !item.spells.isEmpty {
+							if item.id == hoveringID {
 								SpellsView(spells: item.spells)
+									.onAction { spell in
+										galleryModel.spellsFilter.insert(spell.phrase)
+									}
 							}
 						}
 						.cornerRadius(8)

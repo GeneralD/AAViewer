@@ -10,6 +10,16 @@ import SwiftUI
 struct SpellsView: View {
 	@State var spells: [Spell]
 
+	init(spells: [Spell]) {
+		self.spells = spells
+	}
+
+	init(spells: any Sequence<String>) {
+		self.spells = spells.map {
+			.init(phrase: $0, enhanced: .zero)
+		}
+	}
+
 	var body: some View {
 		var width = CGFloat.zero
 		var height = CGFloat.zero
@@ -43,8 +53,19 @@ struct SpellsView: View {
 						}
 						return result
 					})
+					.onTapGesture {
+						action?(spell)
+					}
 			}
 		}
+	}
+
+	private var action: ((Spell) -> Void)? = nil
+
+	@inlinable func onAction(perform action: @escaping (Spell) -> Void) -> Self {
+		var copied = self
+		copied.action = action
+		return copied
 	}
 }
 
