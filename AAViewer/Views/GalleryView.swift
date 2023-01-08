@@ -7,6 +7,7 @@
 
 import Kingfisher
 import SwiftUI
+import TagKit
 import WaterfallGrid
 
 struct GalleryView: View {
@@ -35,10 +36,16 @@ struct GalleryView: View {
 						.aspectRatio(contentMode: .fit)
 						.overlay {
 							if item.id == hoveringID {
-								SpellsView(spells: item.spells)
-									.onAction { spell in
-										galleryModel.spellsFilter.insert(spell.phrase)
-									}
+								TagList(tags: item.spells.map(\.phrase)) { tag in
+									Text(tag)
+										.padding(.all, 4)
+										.background(Color(seed: tag))
+										.foregroundColor(.white)
+										.cornerRadius(32)
+										.onTapGesture {
+											galleryModel.spellsFilter.insert(tag)
+										}
+								}
 							}
 						}
 						.cornerRadius(8)

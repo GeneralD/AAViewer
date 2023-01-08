@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B33003A3296AF8DE008704AA /* TagKit in Frameworks */ = {isa = PBXBuildFile; productRef = B33003A2296AF8DE008704AA /* TagKit */; };
 		B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = B36B219929669E6800E47DFE /* SwiftyUserDefaults */; };
 		B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633C2965CCFA001851FD /* AAViewerApp.swift */; };
 		B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633E2965CCFA001851FD /* GalleryView.swift */; };
@@ -18,7 +19,6 @@
 		B38C63592965F267001851FD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B38C63582965F267001851FD /* Kingfisher */; };
 		B3A67775296674590028579C /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A67774296674590028579C /* SettingModel.swift */; };
 		B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C91C2965FB3200C8B6BD /* Spell.swift */; };
-		B3F0C9242965FF4800C8B6BD /* SpellsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C9232965FF4800C8B6BD /* SpellsView.swift */; };
 		B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C925296605E100C8B6BD /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +33,6 @@
 		B38C63552965EE66001851FD /* GalleryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItem.swift; sourceTree = "<group>"; };
 		B3A67774296674590028579C /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		B3F0C91C2965FB3200C8B6BD /* Spell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spell.swift; sourceTree = "<group>"; };
-		B3F0C9232965FF4800C8B6BD /* SpellsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellsView.swift; sourceTree = "<group>"; };
 		B3F0C925296605E100C8B6BD /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +43,7 @@
 			files = (
 				B38C63592965F267001851FD /* Kingfisher in Frameworks */,
 				B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */,
+				B33003A3296AF8DE008704AA /* TagKit in Frameworks */,
 				B38C63542965EB8E001851FD /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				B38C633E2965CCFA001851FD /* GalleryView.swift */,
-				B3F0C9232965FF4800C8B6BD /* SpellsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +136,7 @@
 				B38C63532965EB8E001851FD /* WaterfallGrid */,
 				B38C63582965F267001851FD /* Kingfisher */,
 				B36B219929669E6800E47DFE /* SwiftyUserDefaults */,
+				B33003A2296AF8DE008704AA /* TagKit */,
 			);
 			productName = AAViewer;
 			productReference = B38C63392965CCFA001851FD /* AAViewer.app */;
@@ -170,6 +170,7 @@
 				B38C63522965EB8E001851FD /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 				B38C63572965F267001851FD /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				B36B219829669E6800E47DFE /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
+				B33003A1296AF8DE008704AA /* XCRemoteSwiftPackageReference "TagKit" */,
 			);
 			productRefGroup = B38C633A2965CCFA001851FD /* Products */;
 			projectDirPath = "";
@@ -204,7 +205,6 @@
 				B3A67775296674590028579C /* SettingModel.swift in Sources */,
 				B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */,
 				B38C63562965EE66001851FD /* GalleryItem.swift in Sources */,
-				B3F0C9242965FF4800C8B6BD /* SpellsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +404,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B33003A1296AF8DE008704AA /* XCRemoteSwiftPackageReference "TagKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/TagKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		B36B219829669E6800E47DFE /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults";
@@ -431,6 +439,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B33003A2296AF8DE008704AA /* TagKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B33003A1296AF8DE008704AA /* XCRemoteSwiftPackageReference "TagKit" */;
+			productName = TagKit;
+		};
 		B36B219929669E6800E47DFE /* SwiftyUserDefaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B36B219829669E6800E47DFE /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;

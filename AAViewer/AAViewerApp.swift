@@ -6,18 +6,33 @@
 //
 
 import SwiftUI
+import TagKit
 
 @main
 struct AAViewerApp: App {
-	@StateObject var galleryModel = GalleryModel()
-	@StateObject var settingModel = SettingModel()
+	@StateObject private var galleryModel = GalleryModel()
+	@StateObject private var settingModel = SettingModel()
 
 	var body: some Scene {
 		WindowGroup {
 			VStack {
-				SpellsView(spells: galleryModel.spellsFilter)
+				TagList(tags: .init(galleryModel.spellsFilter)) { tag in
+					Text(tag)
+						.padding(.all, 4)
+						.background(Color(seed: tag))
+						.foregroundColor(.white)
+						.cornerRadius(32)
+						.onTapGesture {
+							galleryModel.spellsFilter.remove(tag)
+						}
+				}
+
+				Spacer(minLength: 0)
+
 				GalleryView(galleryModel: galleryModel, settingModel: settingModel)
 					.searchable(text: $galleryModel.textFilter)
+
+				Spacer(minLength: 0)
 			}
 		}
 		.windowStyle(.hiddenTitleBar)

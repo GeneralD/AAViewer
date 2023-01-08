@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "tagkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/TagKit",
+      "state" : {
+        "revision" : "9a2a9386fa33ae1dffee83439f71056a6d64c97e",
+        "version" : "0.1.1"
+      }
+    },
+    {
       "identity" : "waterfallgrid",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/paololeonardi/WaterfallGrid",
