@@ -15,7 +15,7 @@ struct AAViewerApp: App {
 	var body: some Scene {
 		WindowGroup {
 			let galleryModel = GalleryModel()
-			GalleryWindow(galleryModel: galleryModel)
+			GalleryView(galleryModel: galleryModel)
 				.environmentObject(settingModel)
 //				.focusedSceneValue(\.focusedSceneDocument, galleryModel)
 		}

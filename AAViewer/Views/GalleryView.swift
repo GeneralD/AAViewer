@@ -1,64 +1,88 @@
 //
-//  ContentView.swift
+//  GalleryView.swift
 //  AAViewer
 //
-//  Created by Yumenosuke Koukata on 2023/01/05.
+//  Created by Yumenosuke Koukata on 2023/01/09.
 //
 
-import Kingfisher
 import SwiftUI
 import TagKit
-import WaterfallGrid
 
 struct GalleryView: View {
 	@EnvironmentObject private var settingModel: AppSettingModel
-	@ObservedObject var galleryModel = GalleryModel()
-
-	@State private var selectedID: GalleryItem.ID?
+	@StateObject var galleryModel: GalleryModel
 
 	var body: some View {
-		if galleryModel.filteredItems.isEmpty {
-			Button {
-				galleryModel.openDirectoryPicker()
-			} label: {
-				HStack {
-					Image(systemName: "folder.fill")
-					Text("Open Folder")
-				}
-				.padding(.all, 16)
-			}
-		}
-		else {
-			ScrollView(settingModel.galleryScrollAxis) {
-				WaterfallGrid(galleryModel.filteredItems) { item in
-					KFImage(item.url)
-						.resizable()
-						.aspectRatio(contentMode: .fit)
-						.cornerRadius(8)
-						.onTapGesture { selectedID = item.id }
-						.popover(isPresented: isPresented(itemID: item.id)) {
-							taglist(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
-								guard !galleryModel.spellsFilter.contains(phrase) else { return }
-								accum.append(phrase)
-							})
-						}
-				}
-				.scrollOptions(direction: settingModel.galleryScrollAxis)
-				.gridStyle(columns: settingModel.galleryColumns)
-				.padding(8)
-			}
+		VStack {
+			taglist(tags: galleryModel.spellsFilter)
+			Spacer(minLength: 0)
+			GalleryTableView(galleryModel: galleryModel)
+				.environmentObject(settingModel)
+				.searchable(text: $galleryModel.textFilter, placement: .toolbar)
+				.toolbar { toolbar }
+			Spacer(minLength: 0)
 		}
 	}
 }
 
 private extension GalleryView {
+	@ViewBuilder
+	var toolbar: some View {
+		if !galleryModel.spellsFilter.isEmpty {
+			Button {
+				galleryModel.spellsFilter.removeAll()
+			} label: {
+				Image(systemName: "tag.slash")
+			}
+			Button {
+				let pasteboard = NSPasteboard.general
+				pasteboard.clearContents()
+				pasteboard.setString(galleryModel.spellsFilter.joined(separator: ", "), forType: .string)
+			} label: {
+				Image(systemName: "clipboard")
+			}
+			Spacer()
+		}
 
-	func isPresented(itemID: GalleryItem.ID) -> Binding<Bool> {
-		.init(get: {
-			selectedID == itemID
-		}, set: { value in
-			selectedID = value ? itemID : nil
-		})
+		Button {
+			galleryModel.openDirectoryPicker()
+		} label: {
+			Image(systemName: "folder")
+		}
+		if let location = galleryModel.folderURL {
+			Button(location.lastPathComponent) {
+				NSWorkspace.shared.open(location)
+			}
+		}
+		Spacer()
+
+		Button {
+			settingModel.decreaseGalleryColumn()
+		} label: {
+			Image(systemName: "plus.magnifyingglass")
+		}
+		Button {
+			settingModel.increaseGalleryColumn()
+		} label: {
+			Image(systemName: "minus.magnifyingglass")
+		}
+		switch settingModel.galleryScrollAxis {
+		case .vertical:
+			Button {
+				settingModel.galleryScrollAxis = .horizontal
+			} label: {
+				Image(systemName: "align.vertical.top")
+			}
+		case .horizontal:
+			Button {
+				settingModel.galleryScrollAxis = .vertical
+			} label: {
+				Image(systemName: "align.horizontal.left")
+			}
+		default:
+			Divider()
+		}
+		Spacer()
 	}
 
 	@ViewBuilder
@@ -69,15 +93,7 @@ private extension GalleryView {
 				.background(Color(seed: tag))
 				.foregroundColor(.white)
 				.cornerRadius(32)
-				.onTapGesture {
-					galleryModel.spellsFilter.insert(tag)
-				}
+				.onTapGesture { galleryModel.spellsFilter.remove(tag) }
 		}
-	}
-}
-
-struct GalleryView_Previews: PreviewProvider {
-	static var previews: some View {
-		GalleryView()
 	}
 }
