@@ -34,7 +34,12 @@ struct GalleryView: View {
 					KFImage(item.url)
 						.resizable()
 						.aspectRatio(contentMode: .fit)
-						.popover(isPresented: isPresented(itemID: item.id)) { taglist(tags: item.spells.map(\.phrase)) }
+						.popover(isPresented: isPresented(itemID: item.id)) {
+							taglist(tags: item.spells.map(\.phrase).reduce(into: [], { accum, phrase in
+								guard !galleryModel.spellsFilter.contains(phrase) else { return }
+								accum.append(phrase)
+							}))
+						}
 						.cornerRadius(8)
 						.onTapGesture { selectedID = item.id }
 				}
