@@ -11,8 +11,8 @@ import TagKit
 import WaterfallGrid
 
 struct GalleryView: View {
+	@EnvironmentObject private var settingModel: AppSettingModel
 	@ObservedObject var galleryModel = GalleryModel()
-	@ObservedObject var settingModel = AppSettingModel()
 
 	@State private var selectedID: GalleryItem.ID?
 

@@ -9,14 +9,15 @@ import SwiftUI
 import TagKit
 
 struct GalleryWindow: View {
-	@StateObject var settingModel: AppSettingModel
+	@EnvironmentObject private var settingModel: AppSettingModel
 	@StateObject var galleryModel: GalleryModel
 
 	var body: some View {
 		VStack {
 			taglist(tags: galleryModel.spellsFilter)
 			Spacer(minLength: 0)
-			GalleryView(galleryModel: galleryModel, settingModel: settingModel)
+			GalleryView(galleryModel: galleryModel)
+				.environmentObject(settingModel)
 				.searchable(text: $galleryModel.textFilter, placement: .toolbar)
 				.toolbar { toolbar }
 			Spacer(minLength: 0)

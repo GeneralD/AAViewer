@@ -9,30 +9,31 @@ import SwiftUI
 
 @main
 struct AAViewerApp: App {
-
-	@StateObject private var settingModel = AppSettingModel()
+//	@FocusedValue(\.focusedSceneDocument) private var focused
+	private var settingModel = AppSettingModel()
 
 	var body: some Scene {
-		let galleryModel = GalleryModel()
 		WindowGroup {
-			GalleryWindow(settingModel: settingModel, galleryModel: galleryModel)
+			let galleryModel = GalleryModel()
+			GalleryWindow(galleryModel: galleryModel)
+				.environmentObject(settingModel)
+//				.focusedSceneValue(\.focusedSceneDocument, galleryModel)
 		}
 		.windowStyle(.hiddenTitleBar)
-		.commands { commands(galleryModel: galleryModel) }
+		.commands { commands }
 	}
 }
 
 private extension AAViewerApp {
 	@CommandsBuilder
-	func commands(galleryModel: GalleryModel) -> some Commands {
-		CommandGroup(after: .newItem) {
-			Divider()
-			Button("Open...") {
-				// FIX: it opens on all windows
-				galleryModel.openDirectoryPicker()
-			}
-			.keyboardShortcut("o", modifiers: .command)
-		}
+	var commands: some Commands {
+//		CommandGroup(after: .newItem) {
+//			Divider()
+//			Button("Open...") {
+//				focused?.openDirectoryPicker()
+//			}
+//			.keyboardShortcut("o", modifiers: .command)
+//		}
 		CommandGroup(after: .sidebar) {
 			Menu("Scroll Direction") {
 				Button("Horizontal") {
