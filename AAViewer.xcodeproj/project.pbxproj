@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B33003A3296AF8DE008704AA /* TagKit in Frameworks */ = {isa = PBXBuildFile; productRef = B33003A2296AF8DE008704AA /* TagKit */; };
+		B33003A6296BF0A2008704AA /* NSApp+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A5296BF0A2008704AA /* NSApp+Extension.swift */; };
 		B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = B36B219929669E6800E47DFE /* SwiftyUserDefaults */; };
 		B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633C2965CCFA001851FD /* AAViewerApp.swift */; };
 		B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633E2965CCFA001851FD /* GalleryView.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B33003A5296BF0A2008704AA /* NSApp+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApp+Extension.swift"; sourceTree = "<group>"; };
 		B38C63392965CCFA001851FD /* AAViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38C633C2965CCFA001851FD /* AAViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAViewerApp.swift; sourceTree = "<group>"; };
 		B38C633E2965CCFA001851FD /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B33003A4296BF07D008704AA /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				B33003A5296BF0A2008704AA /* NSApp+Extension.swift */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
 		B38C63302965CCFA001851FD = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +80,7 @@
 		B38C633B2965CCFA001851FD /* AAViewer */ = {
 			isa = PBXGroup;
 			children = (
+				B33003A4296BF07D008704AA /* Deprecated */,
 				B3F0C927296605E800C8B6BD /* Utilities */,
 				B3F0C9222965FF3A00C8B6BD /* Views */,
 				B38C634F2965D6D6001851FD /* Models */,
@@ -200,6 +211,7 @@
 			files = (
 				B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */,
 				B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */,
+				B33003A6296BF0A2008704AA /* NSApp+Extension.swift in Sources */,
 				B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */,
 				B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */,
 				B3A67775296674590028579C /* SettingModel.swift in Sources */,

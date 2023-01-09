@@ -30,7 +30,7 @@ struct AAViewerApp: App {
 				Spacer(minLength: 0)
 
 				GalleryView(galleryModel: galleryModel, settingModel: settingModel)
-					.searchable(text: $galleryModel.textFilter)
+					.searchable(text: $galleryModel.textFilter, placement: .toolbar)
 
 				Spacer(minLength: 0)
 			}
@@ -60,14 +60,24 @@ struct AAViewerApp: App {
 				Menu("Zoom (Columns: \(settingModel.galleryColumns))") {
 					Button("Zoom In") {
 						settingModel.decreaseGalleryColumn()
-					}.keyboardShortcut("+", modifiers: .command)
+					}
+					.keyboardShortcut("+", modifiers: .command)
 					Button("Zoom Out") {
 						settingModel.increaseGalleryColumn()
-					}.keyboardShortcut("-", modifiers: .command)
+					}
+					.keyboardShortcut("-", modifiers: .command)
 					Button("Reset") {
 						settingModel.resetGalleryColumn()
-					}.keyboardShortcut("0", modifiers: .command)
+					}
+					.keyboardShortcut("0", modifiers: .command)
 				}
+			}
+			CommandGroup(after: .pasteboard) {
+				Divider()
+				Button("Find") {
+					NSApplication.searchToolbar?.beginSearchInteraction()
+				}
+				.keyboardShortcut("f", modifiers: .command)
 			}
 		}
 	}
