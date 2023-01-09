@@ -31,6 +31,44 @@ struct AAViewerApp: App {
 
 				GalleryView(galleryModel: galleryModel, settingModel: settingModel)
 					.searchable(text: $galleryModel.textFilter, placement: .toolbar)
+					.toolbar {
+						Button {
+							galleryModel.openDirectoryPicker()
+						} label: {
+							Image(systemName: "folder")
+						}
+						if let location = galleryModel.folderURL {
+							Button(location.lastPathComponent) {
+								NSWorkspace.shared.open(location)
+							}
+						}
+						Button {
+							settingModel.decreaseGalleryColumn()
+						} label: {
+							Image(systemName: "plus.magnifyingglass")
+						}
+						Button {
+							settingModel.increaseGalleryColumn()
+						} label: {
+							Image(systemName: "minus.magnifyingglass")
+						}
+						switch settingModel.galleryScrollAxis {
+						case .vertical:
+							Button {
+								settingModel.galleryScrollAxis = .horizontal
+							} label: {
+								Image(systemName: "align.vertical.top")
+							}
+						case .horizontal:
+							Button {
+								settingModel.galleryScrollAxis = .vertical
+							} label: {
+								Image(systemName: "align.horizontal.left")
+							}
+						default:
+							Divider()
+						}
+					}
 
 				Spacer(minLength: 0)
 			}
