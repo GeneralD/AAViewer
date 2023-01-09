@@ -14,8 +14,8 @@ struct GalleryView: View {
 	@ObservedObject var galleryModel = GalleryModel()
 	@ObservedObject var settingModel = SettingModel()
 
-	@State private var hoveringID: GalleryItem.ID?
-	
+	@State private var selectedID: GalleryItem.ID?
+
 	var body: some View {
 		if galleryModel.filteredItems.isEmpty {
 			Button {
@@ -34,27 +34,25 @@ struct GalleryView: View {
 					KFImage(item.url)
 						.resizable()
 						.aspectRatio(contentMode: .fit)
-						.overlay {
-							if item.id == hoveringID {
-								TagList(tags: item.spells.map(\.phrase)) { tag in
-									Text(tag)
-										.padding(.all, 4)
-										.background(Color(seed: tag))
-										.foregroundColor(.white)
-										.cornerRadius(32)
-										.onTapGesture {
-											galleryModel.spellsFilter.insert(tag)
-										}
-								}
+						.popover(isPresented: .init(get: {
+							selectedID == item.id
+						}, set: { value in
+							selectedID = value ? item.id : nil
+						}), attachmentAnchor: .rect(.bounds)) {
+							TagList(tags: item.spells.map(\.phrase)) { tag in
+								Text(tag)
+									.padding(.all, 4)
+									.background(Color(seed: tag))
+									.foregroundColor(.white)
+									.cornerRadius(32)
+									.onTapGesture {
+										galleryModel.spellsFilter.insert(tag)
+									}
 							}
 						}
 						.cornerRadius(8)
-						.onHover { hovering in
-							guard hovering else {
-								hoveringID = nil
-								return
-							}
-							hoveringID = item.id
+						.onTapGesture {
+							selectedID = item.id
 						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
