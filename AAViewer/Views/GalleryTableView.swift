@@ -36,13 +36,33 @@ struct GalleryTableView: View {
 						.cornerRadius(8)
 						.onTapGesture { selectedID = item.id }
 						.popover(isPresented: isPresented(itemID: item.id)) {
-							TagListView(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
-								guard !galleryModel.spellsFilter.contains(phrase) else { return }
-								accum.append(phrase)
-							})
-							.onOnTap { tag in
-								galleryModel.spellsFilter.insert(tag)
+							VStack(alignment: .center, spacing: 8) {
+								TagListView(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
+									guard !galleryModel.spellsFilter.contains(phrase) else { return }
+									accum.append(phrase)
+								})
+								.onOnTap { tag in
+									galleryModel.spellsFilter.insert(tag)
+								}
+								HStack {
+									Button {
+										let pasteboard = NSPasteboard.general
+										pasteboard.clearContents()
+										pasteboard.setString(item.originalPrompt, forType: .string)
+									} label: {
+										Image(systemName: "clipboard")
+										Text("Copy Prompt")
+									}
+									Button {
+										NSWorkspace.shared.open(item.url)
+									} label: {
+										Image(systemName: "photo")
+										Text("Open Image")
+									}
+								}
 							}
+							.frame(minWidth: 320)
+							.padding(.all, 16)
 						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
