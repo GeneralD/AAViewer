@@ -6,94 +6,29 @@
 //
 
 import SwiftUI
-import TagKit
 
 @main
 struct AAViewerApp: App {
-	@StateObject private var galleryModel = GalleryModel()
-	@StateObject private var settingModel = SettingModel()
+
+	@StateObject private var settingModel = AppSettingModel()
 
 	var body: some Scene {
+		let galleryModel = GalleryModel()
 		WindowGroup {
-			VStack {
-				taglist(tags: galleryModel.spellsFilter)
-				Spacer(minLength: 0)
-				GalleryView(galleryModel: galleryModel, settingModel: settingModel)
-					.searchable(text: $galleryModel.textFilter, placement: .toolbar)
-					.toolbar { toolbar }
-				Spacer(minLength: 0)
-			}
+			GalleryWindow(settingModel: settingModel, galleryModel: galleryModel)
 		}
 		.windowStyle(.hiddenTitleBar)
-		.commands { commands }
+		.commands { commands(galleryModel: galleryModel) }
 	}
 }
 
 private extension AAViewerApp {
-	@ViewBuilder
-	var toolbar: some View {
-		if !galleryModel.spellsFilter.isEmpty {
-			Button {
-				galleryModel.spellsFilter.removeAll()
-			} label: {
-				Image(systemName: "tag.slash")
-			}
-			Button {
-				let pasteboard = NSPasteboard.general
-				pasteboard.clearContents()
-				pasteboard.setString(galleryModel.spellsFilter.joined(separator: ", "), forType: .string)
-			} label: {
-				Image(systemName: "clipboard")
-			}
-			Spacer()
-		}
-
-		Button {
-			galleryModel.openDirectoryPicker()
-		} label: {
-			Image(systemName: "folder")
-		}
-		if let location = galleryModel.folderURL {
-			Button(location.lastPathComponent) {
-				NSWorkspace.shared.open(location)
-			}
-		}
-		Spacer()
-
-		Button {
-			settingModel.decreaseGalleryColumn()
-		} label: {
-			Image(systemName: "plus.magnifyingglass")
-		}
-		Button {
-			settingModel.increaseGalleryColumn()
-		} label: {
-			Image(systemName: "minus.magnifyingglass")
-		}
-		switch settingModel.galleryScrollAxis {
-		case .vertical:
-			Button {
-				settingModel.galleryScrollAxis = .horizontal
-			} label: {
-				Image(systemName: "align.vertical.top")
-			}
-		case .horizontal:
-			Button {
-				settingModel.galleryScrollAxis = .vertical
-			} label: {
-				Image(systemName: "align.horizontal.left")
-			}
-		default:
-			Divider()
-		}
-		Spacer()
-	}
-
 	@CommandsBuilder
-	var commands: some Commands {
+	func commands(galleryModel: GalleryModel) -> some Commands {
 		CommandGroup(after: .newItem) {
 			Divider()
 			Button("Open...") {
+				// FIX: it opens on all windows
 				galleryModel.openDirectoryPicker()
 			}
 			.keyboardShortcut("o", modifiers: .command)
@@ -132,18 +67,6 @@ private extension AAViewerApp {
 				NSApplication.searchToolbar?.beginSearchInteraction()
 			}
 			.keyboardShortcut("f", modifiers: .command)
-		}
-	}
-
-	@ViewBuilder
-	func taglist(tags: some Sequence<String>) -> some View {
-		TagList(tags: .init(tags)) { tag in
-			Text(tag)
-				.padding(.all, 4)
-				.background(Color(seed: tag))
-				.foregroundColor(.white)
-				.cornerRadius(32)
-				.onTapGesture { galleryModel.spellsFilter.remove(tag) }
 		}
 	}
 }

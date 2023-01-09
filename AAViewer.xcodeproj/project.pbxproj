@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B33003A3296AF8DE008704AA /* TagKit in Frameworks */ = {isa = PBXBuildFile; productRef = B33003A2296AF8DE008704AA /* TagKit */; };
-		B33003A6296BF0A2008704AA /* NSApp+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A5296BF0A2008704AA /* NSApp+Extension.swift */; };
+		B33003A6296BF0A2008704AA /* NSApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */; };
+		B33003A8296C3FD7008704AA /* GalleryWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A7296C3FD7008704AA /* GalleryWindow.swift */; };
 		B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = B36B219929669E6800E47DFE /* SwiftyUserDefaults */; };
 		B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633C2965CCFA001851FD /* AAViewerApp.swift */; };
 		B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633E2965CCFA001851FD /* GalleryView.swift */; };
@@ -18,13 +19,14 @@
 		B38C63542965EB8E001851FD /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = B38C63532965EB8E001851FD /* WaterfallGrid */; };
 		B38C63562965EE66001851FD /* GalleryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C63552965EE66001851FD /* GalleryItem.swift */; };
 		B38C63592965F267001851FD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B38C63582965F267001851FD /* Kingfisher */; };
-		B3A67775296674590028579C /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A67774296674590028579C /* SettingModel.swift */; };
+		B3A67775296674590028579C /* AppSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A67774296674590028579C /* AppSettingModel.swift */; };
 		B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C91C2965FB3200C8B6BD /* Spell.swift */; };
 		B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C925296605E100C8B6BD /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B33003A5296BF0A2008704AA /* NSApp+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApp+Extension.swift"; sourceTree = "<group>"; };
+		B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extension.swift"; sourceTree = "<group>"; };
+		B33003A7296C3FD7008704AA /* GalleryWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryWindow.swift; sourceTree = "<group>"; };
 		B38C63392965CCFA001851FD /* AAViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38C633C2965CCFA001851FD /* AAViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAViewerApp.swift; sourceTree = "<group>"; };
 		B38C633E2965CCFA001851FD /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
@@ -33,7 +35,7 @@
 		B38C63452965CD0A001851FD /* AAViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AAViewer.entitlements; sourceTree = "<group>"; };
 		B38C63502965D6D6001851FD /* GalleryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryModel.swift; sourceTree = "<group>"; };
 		B38C63552965EE66001851FD /* GalleryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItem.swift; sourceTree = "<group>"; };
-		B3A67774296674590028579C /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		B3A67774296674590028579C /* AppSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingModel.swift; sourceTree = "<group>"; };
 		B3F0C91C2965FB3200C8B6BD /* Spell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spell.swift; sourceTree = "<group>"; };
 		B3F0C925296605E100C8B6BD /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,7 +58,7 @@
 		B33003A4296BF07D008704AA /* Deprecated */ = {
 			isa = PBXGroup;
 			children = (
-				B33003A5296BF0A2008704AA /* NSApp+Extension.swift */,
+				B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */,
 			);
 			path = Deprecated;
 			sourceTree = "<group>";
@@ -106,7 +108,7 @@
 				B38C63502965D6D6001851FD /* GalleryModel.swift */,
 				B38C63552965EE66001851FD /* GalleryItem.swift */,
 				B3F0C91C2965FB3200C8B6BD /* Spell.swift */,
-				B3A67774296674590028579C /* SettingModel.swift */,
+				B3A67774296674590028579C /* AppSettingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				B38C633E2965CCFA001851FD /* GalleryView.swift */,
+				B33003A7296C3FD7008704AA /* GalleryWindow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,10 +214,11 @@
 			files = (
 				B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */,
 				B38C633F2965CCFA001851FD /* GalleryView.swift in Sources */,
-				B33003A6296BF0A2008704AA /* NSApp+Extension.swift in Sources */,
+				B33003A6296BF0A2008704AA /* NSApplication+Extension.swift in Sources */,
+				B33003A8296C3FD7008704AA /* GalleryWindow.swift in Sources */,
 				B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */,
 				B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */,
-				B3A67775296674590028579C /* SettingModel.swift in Sources */,
+				B3A67775296674590028579C /* AppSettingModel.swift in Sources */,
 				B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */,
 				B38C63562965EE66001851FD /* GalleryItem.swift in Sources */,
 			);

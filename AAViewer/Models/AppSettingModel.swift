@@ -1,5 +1,5 @@
 //
-//  SettingModel.swift
+//  AppSettingModel.swift
 //  AAViewer
 //
 //  Created by Yumenosuke Koukata on 2023/01/05.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftyUserDefaults
 
-class SettingModel: ObservableObject {
+class AppSettingModel: ObservableObject {
 	@Published var galleryScrollAxis: Axis.Set = Defaults.galleryScrollAxis {
 		didSet(value) {
 			Defaults.galleryScrollAxis = value
