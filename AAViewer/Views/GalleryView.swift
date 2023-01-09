@@ -34,31 +34,39 @@ struct GalleryView: View {
 					KFImage(item.url)
 						.resizable()
 						.aspectRatio(contentMode: .fit)
-						.popover(isPresented: .init(get: {
-							selectedID == item.id
-						}, set: { value in
-							selectedID = value ? item.id : nil
-						}), attachmentAnchor: .rect(.bounds)) {
-							TagList(tags: item.spells.map(\.phrase)) { tag in
-								Text(tag)
-									.padding(.all, 4)
-									.background(Color(seed: tag))
-									.foregroundColor(.white)
-									.cornerRadius(32)
-									.onTapGesture {
-										galleryModel.spellsFilter.insert(tag)
-									}
-							}
-						}
+						.popover(isPresented: isPresented(itemID: item.id)) { taglist(tags: item.spells.map(\.phrase)) }
 						.cornerRadius(8)
-						.onTapGesture {
-							selectedID = item.id
-						}
+						.onTapGesture { selectedID = item.id }
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
 				.gridStyle(columns: settingModel.galleryColumns)
 				.padding(8)
 			}
+		}
+	}
+}
+
+private extension GalleryView {
+
+	func isPresented(itemID: GalleryItem.ID) -> Binding<Bool> {
+		.init(get: {
+			selectedID == itemID
+		}, set: { value in
+			selectedID = value ? itemID : nil
+		})
+	}
+
+	@ViewBuilder
+	func taglist(tags: some Sequence<String>) -> some View {
+		TagList(tags: .init(tags)) { tag in
+			Text(tag)
+				.padding(.all, 4)
+				.background(Color(seed: tag))
+				.foregroundColor(.white)
+				.cornerRadius(32)
+				.onTapGesture {
+					galleryModel.spellsFilter.insert(tag)
+				}
 		}
 	}
 }
