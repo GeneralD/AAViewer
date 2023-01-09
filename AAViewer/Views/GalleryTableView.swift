@@ -7,7 +7,6 @@
 
 import Kingfisher
 import SwiftUI
-import TagKit
 import WaterfallGrid
 
 struct GalleryTableView: View {
@@ -37,10 +36,13 @@ struct GalleryTableView: View {
 						.cornerRadius(8)
 						.onTapGesture { selectedID = item.id }
 						.popover(isPresented: isPresented(itemID: item.id)) {
-							taglist(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
+							TagListView(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
 								guard !galleryModel.spellsFilter.contains(phrase) else { return }
 								accum.append(phrase)
 							})
+							.onOnTap { tag in
+								galleryModel.spellsFilter.insert(tag)
+							}
 						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
@@ -59,20 +61,6 @@ private extension GalleryTableView {
 		}, set: { value in
 			selectedID = value ? itemID : nil
 		})
-	}
-
-	@ViewBuilder
-	func taglist(tags: some Sequence<String>) -> some View {
-		TagList(tags: .init(tags)) { tag in
-			Text(tag)
-				.padding(.all, 4)
-				.background(Color(seed: tag))
-				.foregroundColor(.white)
-				.cornerRadius(32)
-				.onTapGesture {
-					galleryModel.spellsFilter.insert(tag)
-				}
-		}
 	}
 }
 

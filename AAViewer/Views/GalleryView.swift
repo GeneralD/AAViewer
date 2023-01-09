@@ -14,7 +14,8 @@ struct GalleryView: View {
 
 	var body: some View {
 		VStack {
-			taglist(tags: galleryModel.spellsFilter)
+			TagListView(tags: galleryModel.spellsFilter)
+				.onOnTap { tag in galleryModel.spellsFilter.remove(tag) }
 			Spacer(minLength: 0)
 			GalleryTableView(galleryModel: galleryModel)
 				.environmentObject(settingModel)
@@ -83,17 +84,5 @@ private extension GalleryView {
 			Divider()
 		}
 		Spacer()
-	}
-
-	@ViewBuilder
-	func taglist(tags: some Sequence<String>) -> some View {
-		TagList(tags: .init(tags)) { tag in
-			Text(tag)
-				.padding(.all, 4)
-				.background(Color(seed: tag))
-				.foregroundColor(.white)
-				.cornerRadius(32)
-				.onTapGesture { galleryModel.spellsFilter.remove(tag) }
-		}
 	}
 }
