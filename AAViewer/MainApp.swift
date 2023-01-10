@@ -9,15 +9,13 @@ import SwiftUI
 
 @main
 struct MainApp: App {
-//	@FocusedValue(\.focusedSceneDocument) private var focused
+	@FocusedObject private var focused: GalleryModel?
 	private var settingModel = AppSettingModel()
 
 	var body: some Scene {
 		WindowGroup {
-			let galleryModel = GalleryModel()
-			GalleryView(galleryModel: galleryModel)
+			GalleryView()
 				.environmentObject(settingModel)
-//				.focusedSceneValue(\.focusedSceneDocument, galleryModel)
 		}
 		.windowStyle(.hiddenTitleBar)
 		.commands { commands }
@@ -27,13 +25,13 @@ struct MainApp: App {
 private extension MainApp {
 	@CommandsBuilder
 	var commands: some Commands {
-//		CommandGroup(after: .newItem) {
-//			Divider()
-//			Button("Open...") {
-//				focused?.openDirectoryPicker()
-//			}
-//			.keyboardShortcut("o", modifiers: .command)
-//		}
+		CommandGroup(after: .newItem) {
+			Divider()
+			Button("Open...") {
+				focused?.openDirectoryPicker()
+			}
+			.keyboardShortcut("o", modifiers: .command)
+		}
 		CommandGroup(after: .sidebar) {
 			Menu("Scroll Direction") {
 				Button("Horizontal") {

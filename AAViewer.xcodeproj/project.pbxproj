@@ -10,7 +10,6 @@
 		B33003A3296AF8DE008704AA /* TagKit in Frameworks */ = {isa = PBXBuildFile; productRef = B33003A2296AF8DE008704AA /* TagKit */; };
 		B33003A6296BF0A2008704AA /* NSApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */; };
 		B33003A8296C3FD7008704AA /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A7296C3FD7008704AA /* GalleryView.swift */; };
-		B33003CA296C7CF0008704AA /* FocusedSceneDocumentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003C9296C7CF0008704AA /* FocusedSceneDocumentKey.swift */; };
 		B33003CD296C83B7008704AA /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003CC296C83B7008704AA /* TagListView.swift */; };
 		B33003CF296D326F008704AA /* GalleryItemControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003CE296D326F008704AA /* GalleryItemControlView.swift */; };
 		B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = B36B219929669E6800E47DFE /* SwiftyUserDefaults */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extension.swift"; sourceTree = "<group>"; };
 		B33003A7296C3FD7008704AA /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
-		B33003C9296C7CF0008704AA /* FocusedSceneDocumentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedSceneDocumentKey.swift; sourceTree = "<group>"; };
 		B33003CC296C83B7008704AA /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		B33003CE296D326F008704AA /* GalleryItemControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemControlView.swift; sourceTree = "<group>"; };
 		B38C63392965CCFA001851FD /* AAViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +123,6 @@
 				B38C63552965EE66001851FD /* GalleryItem.swift */,
 				B3F0C91C2965FB3200C8B6BD /* Spell.swift */,
 				B3A67774296674590028579C /* AppSettingModel.swift */,
-				B33003C9296C7CF0008704AA /* FocusedSceneDocumentKey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,7 +235,6 @@
 				B33003CD296C83B7008704AA /* TagListView.swift in Sources */,
 				B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */,
 				B3A67775296674590028579C /* AppSettingModel.swift in Sources */,
-				B33003CA296C7CF0008704AA /* FocusedSceneDocumentKey.swift in Sources */,
 				B38C633D2965CCFA001851FD /* MainApp.swift in Sources */,
 				B38C63562965EE66001851FD /* GalleryItem.swift in Sources */,
 			);

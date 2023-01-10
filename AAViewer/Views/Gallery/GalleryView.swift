@@ -10,7 +10,7 @@ import TagKit
 
 struct GalleryView: View {
 	@EnvironmentObject private var settingModel: AppSettingModel
-	@StateObject var galleryModel: GalleryModel
+	@StateObject private var galleryModel = GalleryModel()
 
 	var body: some View {
 		VStack {
@@ -23,6 +23,7 @@ struct GalleryView: View {
 				.toolbar { toolbar }
 			Spacer(minLength: 0)
 		}
+		.focusedSceneObject(galleryModel)
 	}
 }
 
