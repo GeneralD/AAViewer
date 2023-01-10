@@ -17,8 +17,9 @@ struct GalleryView: View {
 			TagListView(tags: galleryModel.spellsFilter)
 				.onOnTap { tag in galleryModel.spellsFilter.remove(tag) }
 			Spacer(minLength: 0)
-			GalleryTableView(galleryModel: galleryModel)
+			GalleryTableView()
 				.environmentObject(settingModel)
+				.environmentObject(galleryModel)
 				.searchable(text: $galleryModel.textFilter, placement: .toolbar)
 				.toolbar { toolbar }
 			Spacer(minLength: 0)

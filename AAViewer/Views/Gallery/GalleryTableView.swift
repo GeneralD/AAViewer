@@ -12,7 +12,7 @@ import QuickLook
 
 struct GalleryTableView: View {
 	@EnvironmentObject private var settingModel: AppSettingModel
-	@StateObject var galleryModel = GalleryModel()
+	@EnvironmentObject private var galleryModel: GalleryModel
 
 	@State private var selectedID: GalleryItem.ID?
 	@State private var alertDeleteFile = false

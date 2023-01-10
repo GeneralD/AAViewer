@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct MainApp: App {
 	@FocusedObject private var focused: GalleryModel?
-	private var settingModel = AppSettingModel()
+	@StateObject private var settingModel = AppSettingModel()
 
 	var body: some Scene {
 		WindowGroup {
