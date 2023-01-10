@@ -14,7 +14,7 @@
 		B33003CD296C83B7008704AA /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003CC296C83B7008704AA /* TagListView.swift */; };
 		B33003CF296D326F008704AA /* GalleryItemControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003CE296D326F008704AA /* GalleryItemControlView.swift */; };
 		B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = B36B219929669E6800E47DFE /* SwiftyUserDefaults */; };
-		B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633C2965CCFA001851FD /* AAViewerApp.swift */; };
+		B38C633D2965CCFA001851FD /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633C2965CCFA001851FD /* MainApp.swift */; };
 		B38C633F2965CCFA001851FD /* GalleryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38C633E2965CCFA001851FD /* GalleryTableView.swift */; };
 		B38C63412965CD0A001851FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38C63402965CD0A001851FD /* Assets.xcassets */; };
 		B38C63442965CD0A001851FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38C63432965CD0A001851FD /* Preview Assets.xcassets */; };
@@ -34,7 +34,7 @@
 		B33003CC296C83B7008704AA /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		B33003CE296D326F008704AA /* GalleryItemControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemControlView.swift; sourceTree = "<group>"; };
 		B38C63392965CCFA001851FD /* AAViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B38C633C2965CCFA001851FD /* AAViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AAViewerApp.swift; sourceTree = "<group>"; };
+		B38C633C2965CCFA001851FD /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		B38C633E2965CCFA001851FD /* GalleryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryTableView.swift; sourceTree = "<group>"; };
 		B38C63402965CD0A001851FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B38C63432965CD0A001851FD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 				B3F0C927296605E800C8B6BD /* Utilities */,
 				B3F0C9222965FF3A00C8B6BD /* Views */,
 				B38C634F2965D6D6001851FD /* Models */,
-				B38C633C2965CCFA001851FD /* AAViewerApp.swift */,
+				B38C633C2965CCFA001851FD /* MainApp.swift */,
 				B38C63402965CD0A001851FD /* Assets.xcassets */,
 				B38C63452965CD0A001851FD /* AAViewer.entitlements */,
 				B38C63422965CD0A001851FD /* Preview Content */,
@@ -239,7 +239,7 @@
 				B38C63512965D6D6001851FD /* GalleryModel.swift in Sources */,
 				B3A67775296674590028579C /* AppSettingModel.swift in Sources */,
 				B33003CA296C7CF0008704AA /* FocusedSceneDocumentKey.swift in Sources */,
-				B38C633D2965CCFA001851FD /* AAViewerApp.swift in Sources */,
+				B38C633D2965CCFA001851FD /* MainApp.swift in Sources */,
 				B38C63562965EE66001851FD /* GalleryItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

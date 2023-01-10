@@ -41,6 +41,12 @@ struct GalleryItemControlView: View {
 					Text("Copy Prompt")
 				}
 				Button {
+					action?(.previewFile)
+				} label: {
+					Image(systemName: "eye")
+					Text("QuickLook")
+				}
+				Button {
 					action?(.openFile)
 				} label: {
 					Image(systemName: "photo")
@@ -50,7 +56,7 @@ struct GalleryItemControlView: View {
 					alertDeleteFile = true
 				} label: {
 					Image(systemName: "trash")
-					Text("Trash")
+					Text("Delete Image")
 				}
 				.alert(isPresented: $alertDeleteFile) {
 					alert(deleteItem: item)
@@ -66,7 +72,7 @@ struct GalleryItemControlView: View {
 	}
 
 	enum GalleryItemAction {
-		case copyPrompt, openFile, deleteFile, select(tag: String)
+		case copyPrompt, previewFile, openFile, deleteFile, select(tag: String)
 	}
 }
 

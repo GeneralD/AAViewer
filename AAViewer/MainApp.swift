@@ -1,5 +1,5 @@
 //
-//  AAViewerApp.swift
+//  MainApp.swift
 //  AAViewer
 //
 //  Created by Yumenosuke Koukata on 2023/01/05.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct AAViewerApp: App {
+struct MainApp: App {
 //	@FocusedValue(\.focusedSceneDocument) private var focused
 	private var settingModel = AppSettingModel()
 
@@ -24,7 +24,7 @@ struct AAViewerApp: App {
 	}
 }
 
-private extension AAViewerApp {
+private extension MainApp {
 	@CommandsBuilder
 	var commands: some Commands {
 //		CommandGroup(after: .newItem) {

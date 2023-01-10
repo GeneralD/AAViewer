@@ -8,6 +8,7 @@
 import Kingfisher
 import SwiftUI
 import WaterfallGrid
+import QuickLook
 
 struct GalleryTableView: View {
 	@EnvironmentObject private var settingModel: AppSettingModel
@@ -15,6 +16,7 @@ struct GalleryTableView: View {
 
 	@State private var selectedID: GalleryItem.ID?
 	@State private var alertDeleteFile = false
+	@State private var previewURL: URL?
 
 	var body: some View {
 		if galleryModel.filteredItems.isEmpty {
@@ -44,6 +46,8 @@ struct GalleryTableView: View {
 										let pasteboard = NSPasteboard.general
 										pasteboard.clearContents()
 										pasteboard.setString(item.originalPrompt, forType: .string)
+									case .previewFile:
+										previewURL = item.url
 									case .openFile:
 										NSWorkspace.shared.open(item.url)
 									case .deleteFile:
@@ -54,6 +58,7 @@ struct GalleryTableView: View {
 								})
 								.frame(minWidth: 320)
 								.padding(.all, 16)
+								.quickLookPreview($previewURL)
 						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
