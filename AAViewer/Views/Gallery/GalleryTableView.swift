@@ -37,49 +37,23 @@ struct GalleryTableView: View {
 						.cornerRadius(8)
 						.onTapGesture { selectedID = item.id }
 						.popover(isPresented: isPresented(itemID: item.id)) {
-							VStack(alignment: .center, spacing: 8) {
-								Text(item.url.lastPathComponent)
-								Divider()
-								TagListView(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
-									guard !galleryModel.spellsFilter.contains(phrase) else { return }
-									accum.append(phrase)
-								})
-								.onOnTap { tag in
-									galleryModel.spellsFilter.insert(tag)
-								}
-								Divider()
-								HStack {
-									Button {
+							GalleryItemControlView(item: item, excludeTags: galleryModel.spellsFilter, alertDeleteFile: $alertDeleteFile)
+								.onAction(perform: { action in
+									switch action {
+									case .copyPrompt:
 										let pasteboard = NSPasteboard.general
 										pasteboard.clearContents()
 										pasteboard.setString(item.originalPrompt, forType: .string)
-									} label: {
-										Image(systemName: "clipboard")
-										Text("Copy Prompt")
-									}
-									Button {
+									case .openFile:
 										NSWorkspace.shared.open(item.url)
-									} label: {
-										Image(systemName: "photo")
-										Text("Open Image")
+									case .deleteFile:
+										galleryModel.deleteActual(item: item)
+									case .select(let tag):
+										galleryModel.spellsFilter.insert(tag)
 									}
-									Button {
-										alertDeleteFile = true
-									} label: {
-										Image(systemName: "trash")
-										Text("Trash")
-									}
-									.alert(isPresented: $alertDeleteFile) {
-										let path = item.url.absoluteString
-										return Alert(title: Text("Do you want to delete the file immediately?"),
-													 message: Text(path.removingPercentEncoding ?? path),
-													 primaryButton: .destructive(Text("Yes"), action: { galleryModel.deleteActual(item: item) }),
-													 secondaryButton: .cancel())
-									}
-								}
-							}
-							.frame(minWidth: 320)
-							.padding(.all, 16)
+								})
+								.frame(minWidth: 320)
+								.padding(.all, 16)
 						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
