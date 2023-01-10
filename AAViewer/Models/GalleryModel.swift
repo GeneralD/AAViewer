@@ -37,6 +37,11 @@ extension GalleryModel {
 		resetFilters()
 		folderURL = open.url
 	}
+
+	func deleteActual(item: GalleryItem) {
+		try? FileManager.default.removeItem(at: item.url)
+		folderURL = folderURL
+	}
 }
 
 private extension GalleryModel {

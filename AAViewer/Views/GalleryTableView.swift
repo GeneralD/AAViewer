@@ -14,6 +14,7 @@ struct GalleryTableView: View {
 	@StateObject var galleryModel = GalleryModel()
 
 	@State private var selectedID: GalleryItem.ID?
+	@State private var alertDeleteFile = false
 
 	var body: some View {
 		if galleryModel.filteredItems.isEmpty {
@@ -37,6 +38,8 @@ struct GalleryTableView: View {
 						.onTapGesture { selectedID = item.id }
 						.popover(isPresented: isPresented(itemID: item.id)) {
 							VStack(alignment: .center, spacing: 8) {
+								Text(item.url.lastPathComponent)
+								Divider()
 								TagListView(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
 									guard !galleryModel.spellsFilter.contains(phrase) else { return }
 									accum.append(phrase)
@@ -44,6 +47,7 @@ struct GalleryTableView: View {
 								.onOnTap { tag in
 									galleryModel.spellsFilter.insert(tag)
 								}
+								Divider()
 								HStack {
 									Button {
 										let pasteboard = NSPasteboard.general
@@ -58,6 +62,19 @@ struct GalleryTableView: View {
 									} label: {
 										Image(systemName: "photo")
 										Text("Open Image")
+									}
+									Button {
+										alertDeleteFile = true
+									} label: {
+										Image(systemName: "trash")
+										Text("Trash")
+									}
+									.alert(isPresented: $alertDeleteFile) {
+										let path = item.url.absoluteString
+										return Alert(title: Text("Do you want to delete the file immediately?"),
+													 message: Text(path.removingPercentEncoding ?? path),
+													 primaryButton: .destructive(Text("Yes"), action: { galleryModel.deleteActual(item: item) }),
+													 secondaryButton: .cancel())
 									}
 								}
 							}
