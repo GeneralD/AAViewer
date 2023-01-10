@@ -10,15 +10,13 @@ import SwiftUI
 struct GalleryItemControlView: View {
 	private let item: GalleryItem
 	private let excludeTags: any Sequence<String>
-
 	private var action: ((GalleryItemAction) -> Void)? = nil
 
-	@Binding var alertDeleteFile: Bool
+	@State private var alertDeleteFile = false
 
-	init(item: GalleryItem, excludeTags: any Sequence<String>, alertDeleteFile: Binding<Bool>) {
+	init(item: GalleryItem, excludeTags: any Sequence<String>) {
 		self.item = item
 		self.excludeTags = excludeTags
-		self._alertDeleteFile = alertDeleteFile
 	}
 
 	var body: some View {

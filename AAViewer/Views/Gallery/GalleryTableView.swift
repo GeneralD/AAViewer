@@ -39,7 +39,7 @@ struct GalleryTableView: View {
 						.cornerRadius(8)
 						.onTapGesture { selectedID = item.id }
 						.popover(isPresented: isPresented(itemID: item.id)) {
-							GalleryItemControlView(item: item, excludeTags: galleryModel.spellsFilter, alertDeleteFile: $alertDeleteFile)
+							GalleryItemControlView(item: item, excludeTags: galleryModel.spellsFilter)
 								.onAction(perform: { action in
 									switch action {
 									case .copyPrompt:
@@ -58,13 +58,13 @@ struct GalleryTableView: View {
 								})
 								.frame(minWidth: 320)
 								.padding(.all, 16)
-								.quickLookPreview($previewURL)
 						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
 				.gridStyle(columns: settingModel.galleryColumns)
 				.padding(8)
 			}
+			.quickLookPreview($previewURL)
 		}
 	}
 }
