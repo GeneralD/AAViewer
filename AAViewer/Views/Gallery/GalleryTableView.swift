@@ -6,6 +6,7 @@
 //
 
 import Kingfisher
+import SFSafeSymbols
 import SwiftUI
 import WaterfallGrid
 import QuickLook
@@ -24,8 +25,9 @@ struct GalleryTableView: View {
 				galleryModel.openDirectoryPicker()
 			} label: {
 				HStack {
-					Image(systemName: "folder.fill")
-					Text("Open Folder")
+					Image(systemSymbol: .folderFill)
+					Text(R.string.localizable.buttonOpenFolder)
+
 				}
 				.padding(.all, 16)
 			}

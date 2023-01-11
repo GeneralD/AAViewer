@@ -5,6 +5,7 @@
 //  Created by Yumenosuke Koukata on 2023/01/10.
 //
 
+import SFSafeSymbols
 import SwiftUI
 
 struct GalleryItemControlView: View {
@@ -35,26 +36,26 @@ struct GalleryItemControlView: View {
 				Button {
 					action?(.copyPrompt)
 				} label: {
-					Image(systemName: "clipboard")
-					Text("Copy Prompt")
+					Image(systemSymbol: .clipboard)
+					Text(R.string.localizable.buttonCopyPrompt)
 				}
 				Button {
 					action?(.previewFile)
 				} label: {
-					Image(systemName: "eye")
-					Text("QuickLook")
+					Image(systemSymbol: .eye)
+					Text(R.string.localizable.buttonPreview)
 				}
 				Button {
 					action?(.openFile)
 				} label: {
-					Image(systemName: "photo")
-					Text("Open Image")
+					Image(systemSymbol: .photo)
+					Text(R.string.localizable.buttonOpenImage)
 				}
 				Button {
 					alertDeleteFile = true
 				} label: {
-					Image(systemName: "trash")
-					Text("Delete Image")
+					Image(systemSymbol: .trash)
+					Text(R.string.localizable.buttonDeleteImage)
 				}
 				.alert(isPresented: $alertDeleteFile) {
 					alert(deleteItem: item)
@@ -77,9 +78,9 @@ struct GalleryItemControlView: View {
 private extension GalleryItemControlView {
 	func alert(deleteItem: GalleryItem) -> Alert {
 		let path = item.url.absoluteString
-		return Alert(title: Text("Do you want to delete the file immediately?"),
+		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletion),
 					 message: Text(path.removingPercentEncoding ?? path),
-					 primaryButton: .destructive(Text("Yes"), action: { action?(.deleteFile) }),
+					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: { action?(.deleteFile) }),
 					 secondaryButton: .cancel())
 	}
 }

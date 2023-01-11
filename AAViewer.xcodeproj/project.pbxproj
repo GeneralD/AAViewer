@@ -24,6 +24,9 @@
 		B3A67775296674590028579C /* AppSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A67774296674590028579C /* AppSettingModel.swift */; };
 		B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C91C2965FB3200C8B6BD /* Spell.swift */; };
 		B3F0C926296605E100C8B6BD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F0C925296605E100C8B6BD /* Color+Extension.swift */; };
+		B3F59117296E4AA000B1479D /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = B3F59116296E4AA000B1479D /* SFSafeSymbols */; };
+		B3F59121296E509300B1479D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3F59123296E509300B1479D /* Localizable.strings */; };
+		B3F59137296E5A2400B1479D /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = B3F59136296E5A2400B1479D /* RswiftLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,8 @@
 		B3A67774296674590028579C /* AppSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingModel.swift; sourceTree = "<group>"; };
 		B3F0C91C2965FB3200C8B6BD /* Spell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spell.swift; sourceTree = "<group>"; };
 		B3F0C925296605E100C8B6BD /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		B3F59122296E509300B1479D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B3F59124296E50A900B1479D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,10 +54,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3F59117296E4AA000B1479D /* SFSafeSymbols in Frameworks */,
 				B38C63592965F267001851FD /* Kingfisher in Frameworks */,
 				B36B219A29669E6800E47DFE /* SwiftyUserDefaults in Frameworks */,
 				B33003A3296AF8DE008704AA /* TagKit in Frameworks */,
 				B38C63542965EB8E001851FD /* WaterfallGrid in Frameworks */,
+				B3F59137296E5A2400B1479D /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,8 +87,10 @@
 		B38C63302965CCFA001851FD = {
 			isa = PBXGroup;
 			children = (
+				B3F59125296E50C500B1479D /* Resources */,
 				B38C633B2965CCFA001851FD /* AAViewer */,
 				B38C633A2965CCFA001851FD /* Products */,
+				B3F59138296E5A6900B1479D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +153,21 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		B3F59125296E50C500B1479D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B3F59123296E509300B1479D /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B3F59138296E5A6900B1479D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,6 +182,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B3F5913A296E5A8A00B1479D /* PBXTargetDependency */,
 			);
 			name = AAViewer;
 			packageProductDependencies = (
@@ -165,6 +190,8 @@
 				B38C63582965F267001851FD /* Kingfisher */,
 				B36B219929669E6800E47DFE /* SwiftyUserDefaults */,
 				B33003A2296AF8DE008704AA /* TagKit */,
+				B3F59116296E4AA000B1479D /* SFSafeSymbols */,
+				B3F59136296E5A2400B1479D /* RswiftLibrary */,
 			);
 			productName = AAViewer;
 			productReference = B38C63392965CCFA001851FD /* AAViewer.app */;
@@ -192,6 +219,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = B38C63302965CCFA001851FD;
 			packageReferences = (
@@ -199,6 +227,8 @@
 				B38C63572965F267001851FD /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				B36B219829669E6800E47DFE /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				B33003A1296AF8DE008704AA /* XCRemoteSwiftPackageReference "TagKit" */,
+				B3F59115296E4AA000B1479D /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				B3F59135296E5A2400B1479D /* XCRemoteSwiftPackageReference "R" */,
 			);
 			productRefGroup = B38C633A2965CCFA001851FD /* Products */;
 			projectDirPath = "";
@@ -215,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B38C63442965CD0A001851FD /* Preview Assets.xcassets in Resources */,
+				B3F59121296E509300B1479D /* Localizable.strings in Resources */,
 				B38C63412965CD0A001851FD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +272,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B3F5913A296E5A8A00B1479D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = B3F59139296E5A8A00B1479D /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B3F59123296E509300B1479D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B3F59122296E509300B1479D /* ja */,
+				B3F59124296E50A900B1479D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B38C63462965CD0A001851FD /* Debug */ = {
@@ -468,6 +518,22 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		B3F59115296E4AA000B1479D /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		B3F59135296E5A2400B1479D /* XCRemoteSwiftPackageReference "R" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -490,6 +556,20 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B38C63572965F267001851FD /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		B3F59116296E4AA000B1479D /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3F59115296E4AA000B1479D /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
+		};
+		B3F59136296E5A2400B1479D /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3F59135296E5A2400B1479D /* XCRemoteSwiftPackageReference "R" */;
+			productName = RswiftLibrary;
+		};
+		B3F59139296E5A8A00B1479D /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "plugin:RswiftGenerateInternalResources";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

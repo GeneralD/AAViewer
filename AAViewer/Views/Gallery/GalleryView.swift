@@ -5,6 +5,7 @@
 //  Created by Yumenosuke Koukata on 2023/01/09.
 //
 
+import SFSafeSymbols
 import SwiftUI
 import TagKit
 
@@ -35,14 +36,14 @@ private extension GalleryView {
 			Button {
 				galleryModel.spellsFilter.removeAll()
 			} label: {
-				Image(systemName: "tag.slash")
+				Image(systemSymbol: .tagSlash)
 			}
 			Button {
 				let pasteboard = NSPasteboard.general
 				pasteboard.clearContents()
 				pasteboard.setString(galleryModel.spellsFilter.joined(separator: ", "), forType: .string)
 			} label: {
-				Image(systemName: "clipboard")
+				Image(systemSymbol: .clipboard)
 			}
 			Spacer()
 		}
@@ -50,7 +51,7 @@ private extension GalleryView {
 		Button {
 			galleryModel.openDirectoryPicker()
 		} label: {
-			Image(systemName: "folder")
+			Image(systemSymbol: .folder)
 		}
 		if let location = galleryModel.folderURL {
 			Button(location.lastPathComponent) {
@@ -62,25 +63,25 @@ private extension GalleryView {
 		Button {
 			settingModel.decreaseGalleryColumn()
 		} label: {
-			Image(systemName: "plus.magnifyingglass")
+			Image(systemSymbol: .plusMagnifyingglass)
 		}
 		Button {
 			settingModel.increaseGalleryColumn()
 		} label: {
-			Image(systemName: "minus.magnifyingglass")
+			Image(systemSymbol: .minusMagnifyingglass)
 		}
 		switch settingModel.galleryScrollAxis {
 		case .vertical:
 			Button {
 				settingModel.galleryScrollAxis = .horizontal
 			} label: {
-				Image(systemName: "align.vertical.top")
+				Image(systemSymbol: .alignVerticalTop)
 			}
 		case .horizontal:
 			Button {
 				settingModel.galleryScrollAxis = .vertical
 			} label: {
-				Image(systemName: "align.horizontal.left")
+				Image(systemSymbol: .alignHorizontalLeft)
 			}
 		default:
 			Divider()
