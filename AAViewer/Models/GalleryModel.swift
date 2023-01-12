@@ -33,6 +33,10 @@ class GalleryModel: ObservableObject {
 			.compactMap(loadGalleryItems(from:))
 			.assign(to: &$allItems)
 
+		$folderURL
+			.map { _ in .viewer }
+			.assign(to: &$mode)
+
 		$allItems
 			.map(\.isEmpty)
 			.assign(to: &$isEmpty)

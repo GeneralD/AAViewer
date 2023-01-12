@@ -15,7 +15,7 @@ struct GalleryTableView: View {
 	@EnvironmentObject private var settingModel: AppSettingModel
 	@EnvironmentObject private var galleryModel: GalleryModel
 
-	@State private var selectedID: GalleryItem.ID?
+	@State private var popoverPresentedID: GalleryItem.ID?
 	@State private var alertDeleteFile = false
 	@State private var previewURL: URL?
 
@@ -40,8 +40,10 @@ struct GalleryTableView: View {
 						.aspectRatio(contentMode: .fit)
 						.cornerRadius(8)
 						.onTapGesture {
-							selectedID = item.id
-							if case let .multipleSelection(selected, hideSelected) = galleryModel.mode {
+							switch galleryModel.mode {
+							case .viewer:
+								popoverPresentedID = item.id
+							case let .multipleSelection(selected, hideSelected):
 								if selected.contains(item) {
 									galleryModel.mode = .multipleSelection(selected: selected.subtracting([item]), hideSelected: hideSelected)
 								} else {
@@ -72,10 +74,19 @@ struct GalleryTableView: View {
 						}
 						.overlay(alignment: .topLeading) {
 							if case let .multipleSelection(selected, _) = galleryModel.mode {
-								Image(systemSymbol: selected.contains(item) ? .checkmarkCircleFill : .checkmarkCircle)
-									.font(.system(size: 18))
-									.foregroundColor(.blue)
-									.padding(4)
+								let isItemSelected = selected.contains(item)
+								HStack(spacing: 4) {
+									Image(systemSymbol: isItemSelected ? .checkmarkCircleFill : .checkmarkCircle)
+										.font(.system(size: 18))
+										.foregroundColor(isItemSelected ? .red : .white)
+									Image(systemSymbol: .infoCircle)
+										.font(.system(size: 18))
+										.foregroundColor(.white)
+										.onTapGesture {
+											popoverPresentedID = item.id
+										}
+								}
+								.padding(4)
 							}
 						}
 				}
@@ -93,9 +104,9 @@ private extension GalleryTableView {
 
 	func isPresented(itemID: GalleryItem.ID) -> Binding<Bool> {
 		.init(get: {
-			selectedID == itemID
+			popoverPresentedID == itemID
 		}, set: { value in
-			selectedID = value ? itemID : nil
+			popoverPresentedID = value ? itemID : nil
 		})
 	}
 }
