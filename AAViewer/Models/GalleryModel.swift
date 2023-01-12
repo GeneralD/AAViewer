@@ -11,16 +11,22 @@ import CoreImage
 import Foundation
 
 class GalleryModel: ObservableObject {
-	@Published private(set) var folderURL: URL?
-	@Published private(set) var filteredItems: [GalleryItem] = []
-	
+
 	@Published var textFilter: String = ""
 	@Published var spellsFilter: Set<String> = .init()
+
+	@Published private(set) var folderURL: URL?
+	@Published private(set) var filteredItems: [GalleryItem] = []
+
+	@Published private var allItems: [GalleryItem] = []
 	
 	init() {
 		$folderURL
 			.compactMap { $0 }
 			.compactMap(loadGalleryItems(from:))
+			.assign(to: &$allItems)
+
+		$allItems
 			.combineLatest($textFilter, $spellsFilter, filtered(items: searchText: spells:))
 			.subscribe(on: DispatchQueue.global())
 			.receive(on: DispatchQueue.main)
@@ -40,7 +46,8 @@ extension GalleryModel {
 
 	func deleteActual(item: GalleryItem) {
 		try? FileManager.default.removeItem(at: item.url)
-		folderURL = folderURL
+		guard let index = allItems.firstIndex(of: item) else { return }
+		allItems.remove(at: index)
 	}
 }
 
