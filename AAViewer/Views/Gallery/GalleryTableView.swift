@@ -51,7 +51,7 @@ struct GalleryTableView: View {
 								}
 							}
 						}
-						.popover(isPresented: isPresented(itemID: item.id)) {
+						.popover(isPresented: $popoverPresentedID == item.id) {
 							GalleryItemControlView(item: item, excludeTags: galleryModel.spellsFilter)
 								.onAction(perform: { action in
 									switch action {
@@ -100,19 +100,10 @@ struct GalleryTableView: View {
 	}
 }
 
-private extension GalleryTableView {
-
-	func isPresented(itemID: GalleryItem.ID) -> Binding<Bool> {
-		.init(get: {
-			popoverPresentedID == itemID
-		}, set: { value in
-			popoverPresentedID = value ? itemID : nil
-		})
-	}
-}
-
-struct GalleryView_Previews: PreviewProvider {
+struct GalleryTableView_Previews: PreviewProvider {
 	static var previews: some View {
 		GalleryTableView()
+			.environmentObject(AppSettingModel())
+			.environmentObject(GalleryModel())
 	}
 }

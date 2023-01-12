@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B30D508C29701959002071DB /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30D508B29701959002071DB /* Binding+Extension.swift */; };
 		B33003A3296AF8DE008704AA /* TagKit in Frameworks */ = {isa = PBXBuildFile; productRef = B33003A2296AF8DE008704AA /* TagKit */; };
 		B33003A6296BF0A2008704AA /* NSApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */; };
 		B33003A8296C3FD7008704AA /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33003A7296C3FD7008704AA /* GalleryView.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B30D508B29701959002071DB /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
 		B33003A5296BF0A2008704AA /* NSApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extension.swift"; sourceTree = "<group>"; };
 		B33003A7296C3FD7008704AA /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		B33003CC296C83B7008704AA /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				B3F0C925296605E100C8B6BD /* Color+Extension.swift */,
+				B30D508B29701959002071DB /* Binding+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3F0C91D2965FB3200C8B6BD /* Spell.swift in Sources */,
+				B30D508C29701959002071DB /* Binding+Extension.swift in Sources */,
 				B38C633F2965CCFA001851FD /* GalleryTableView.swift in Sources */,
 				B33003CF296D326F008704AA /* GalleryItemControlView.swift in Sources */,
 				B33003A6296BF0A2008704AA /* NSApplication+Extension.swift in Sources */,

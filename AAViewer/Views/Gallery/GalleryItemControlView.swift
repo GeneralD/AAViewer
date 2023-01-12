@@ -80,7 +80,7 @@ private extension GalleryItemControlView {
 		let path = item.url.absoluteString
 		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletion),
 					 message: Text(path.removingPercentEncoding ?? path),
-					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: { action?(.deleteFile) }),
+					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes)) { action?(.deleteFile) },
 					 secondaryButton: .cancel())
 	}
 }

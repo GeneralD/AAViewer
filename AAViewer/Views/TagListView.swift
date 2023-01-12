@@ -33,3 +33,10 @@ struct TagListView: View {
 		return copied
 	}
 }
+
+struct TagListView_Previews: PreviewProvider {
+	static var previews: some View {
+		TagListView(tags: ["alice", "bob", "carol", "charlie", "dave", "ellen", "frank"].map(\.capitalized))
+			.frame(height: 32)
+	}
+}

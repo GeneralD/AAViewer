@@ -12,6 +12,7 @@
 "button.openImage" = "Open Image";
 "button.deleteImage" = "Delete Image";
 "alert.title.confirmDeletion" = "Do you want to delete the file immediately?";
+"alert.title.confirmDeletionSelectedImages" = "Do you want to delete the selected %d files immediately?";
 "alert.button.commonYes" = "Yes";
 "label.numberOfItems" = "%d items";
 "label.numberOfSelectedItems" = "%d items selected";

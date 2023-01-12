@@ -12,6 +12,7 @@ import TagKit
 struct GalleryView: View {
 	@EnvironmentObject private var settingModel: AppSettingModel
 	@StateObject private var galleryModel = GalleryModel()
+	@State private var isPresentedAlertDeleteSelectedFiles = false
 
 	var body: some View {
 		VStack {
@@ -23,6 +24,7 @@ struct GalleryView: View {
 				.environmentObject(galleryModel)
 				.searchable(text: $galleryModel.textFilter, placement: .toolbar)
 				.toolbar { toolbar }
+				.alert(isPresented: $isPresentedAlertDeleteSelectedFiles) { alertDeleteSelectedFiles }
 			Spacer(minLength: 0)
 		}
 		.focusedSceneObject(galleryModel)
@@ -126,8 +128,7 @@ private extension GalleryView {
 			}
 			if !selected.isEmpty {
 				Button {
-					// TODO: confirm in alert
-					galleryModel.deleteSelectedItems()
+					isPresentedAlertDeleteSelectedFiles = true
 				} label: {
 					Image(systemSymbol: .trash)
 						.foregroundColor(.red)
@@ -135,5 +136,19 @@ private extension GalleryView {
 				Text(R.string.localizable.labelNumberOfSelectedItems(selected.count))
 			}
 		}
+	}
+
+	var alertDeleteSelectedFiles: Alert {
+		guard case let .multipleSelection(selected, _) = galleryModel.mode else { return .init(title: .init(.init())) }
+		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletionSelectedImages(selected.count)),
+			  primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: galleryModel.deleteSelectedItems),
+			  secondaryButton: .cancel())
+	}
+}
+
+struct GalleryView_Previews: PreviewProvider {
+	static var previews: some View {
+		GalleryView()
+			.environmentObject(AppSettingModel())
 	}
 }

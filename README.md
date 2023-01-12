@@ -5,4 +5,4 @@
 - [ ] paginate (too slow)
 - [x] show current URL on top
 - [ ] space key to quicklook
-- [ ] FocusedValue not working
+- [x] FocusedValue not working
