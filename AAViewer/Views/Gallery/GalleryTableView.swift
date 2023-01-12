@@ -20,7 +20,7 @@ struct GalleryTableView: View {
 	@State private var previewURL: URL?
 
 	var body: some View {
-		if galleryModel.filteredItems.isEmpty {
+		if galleryModel.isEmpty {
 			Button {
 				galleryModel.openDirectoryPicker()
 			} label: {
@@ -34,12 +34,21 @@ struct GalleryTableView: View {
 		}
 		else {
 			ScrollView(settingModel.galleryScrollAxis) {
-				WaterfallGrid(galleryModel.filteredItems) { item in
+				WaterfallGrid(galleryModel.items) { item in
 					KFImage(item.url)
 						.resizable()
 						.aspectRatio(contentMode: .fit)
 						.cornerRadius(8)
-						.onTapGesture { selectedID = item.id }
+						.onTapGesture {
+							selectedID = item.id
+							if case let .multipleSelection(selected, hideSelected) = galleryModel.mode {
+								if selected.contains(item) {
+									galleryModel.mode = .multipleSelection(selected: selected.subtracting([item]), hideSelected: hideSelected)
+								} else {
+									galleryModel.mode = .multipleSelection(selected: selected.union([item]), hideSelected: hideSelected)
+								}
+							}
+						}
 						.popover(isPresented: isPresented(itemID: item.id)) {
 							GalleryItemControlView(item: item, excludeTags: galleryModel.spellsFilter)
 								.onAction(perform: { action in
@@ -61,11 +70,20 @@ struct GalleryTableView: View {
 								.frame(minWidth: 320)
 								.padding(.all, 16)
 						}
+						.overlay(alignment: .topLeading) {
+							if case let .multipleSelection(selected, _) = galleryModel.mode {
+								Image(systemSymbol: selected.contains(item) ? .checkmarkCircleFill : .checkmarkCircle)
+									.font(.system(size: 18))
+									.foregroundColor(.blue)
+									.padding(4)
+							}
+						}
 				}
 				.scrollOptions(direction: settingModel.galleryScrollAxis)
 				.gridStyle(columns: settingModel.galleryColumns)
 				.padding(8)
 			}
+			.padding(.top, 0.1) // Ensure toolbars and content do not overlap
 			.quickLookPreview($previewURL)
 		}
 	}

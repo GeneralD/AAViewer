@@ -13,7 +13,7 @@ struct GalleryItem {
 	let originalPrompt: String
 }
 
-extension GalleryItem: Equatable {}
+extension GalleryItem: Equatable, Hashable {}
 
 extension GalleryItem: Identifiable {
 	var id: URL { url }

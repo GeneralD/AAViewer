@@ -13,3 +13,5 @@
 "button.deleteImage" = "Delete Image";
 "alert.title.confirmDeletion" = "Do you want to delete the file immediately?";
 "alert.button.commonYes" = "Yes";
+"label.numberOfItems" = "%d items";
+"label.numberOfSelectedItems" = "%d items selected";

@@ -58,6 +58,9 @@ private extension GalleryView {
 				NSWorkspace.shared.open(location)
 			}
 		}
+		if !galleryModel.items.isEmpty {
+			Text(R.string.localizable.labelNumberOfItems(galleryModel.items.count))
+		}
 		Spacer()
 
 		Button {
@@ -75,17 +78,62 @@ private extension GalleryView {
 			Button {
 				settingModel.galleryScrollAxis = .horizontal
 			} label: {
-				Image(systemSymbol: .alignVerticalTop)
+				Image(systemSymbol: .alignHorizontalLeft)
 			}
 		case .horizontal:
 			Button {
 				settingModel.galleryScrollAxis = .vertical
 			} label: {
-				Image(systemSymbol: .alignHorizontalLeft)
+				Image(systemSymbol: .alignVerticalTop)
 			}
 		default:
 			Divider()
 		}
 		Spacer()
+		switch galleryModel.mode {
+		case .viewer:
+			Button {
+				galleryModel.mode = .multipleSelection(selected: [], hideSelected: false)
+			} label: {
+				Image(systemSymbol: .checkmark)
+			}
+		case let .multipleSelection(selected, hideSelected):
+			Button {
+				galleryModel.mode = .viewer
+			} label: {
+				Image(systemSymbol: .eye)
+			}
+			if !selected.isSuperset(of: galleryModel.items) {
+				Button {
+					galleryModel.mode = .multipleSelection(selected: selected.union(galleryModel.items), hideSelected: hideSelected)
+				} label: {
+					Image(systemSymbol: .checkmarkCircleFill)
+						.foregroundColor(.blue)
+				}
+			}
+			if !hideSelected, !selected.isDisjoint(with: galleryModel.items) {
+				Button {
+					galleryModel.mode = .multipleSelection(selected: selected.subtracting(galleryModel.items), hideSelected: hideSelected)
+				} label: {
+					Image(systemSymbol: .checkmarkCircle)
+						.foregroundColor(.blue)
+				}
+			}
+			Button {
+				galleryModel.mode = .multipleSelection(selected: selected, hideSelected: !hideSelected)
+			} label: {
+				Image(systemSymbol: hideSelected ? .appBadgeCheckmark : .squareDotted)
+			}
+			if !selected.isEmpty {
+				Button {
+					// TODO: confirm in alert
+					galleryModel.deleteSelectedItems()
+				} label: {
+					Image(systemSymbol: .trash)
+						.foregroundColor(.red)
+				}
+				Text(R.string.localizable.labelNumberOfSelectedItems(selected.count))
+			}
+		}
 	}
 }

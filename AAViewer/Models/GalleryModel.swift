@@ -14,12 +14,19 @@ class GalleryModel: ObservableObject {
 
 	@Published var textFilter: String = ""
 	@Published var spellsFilter: Set<String> = .init()
+	@Published var mode: Mode = .viewer
 
 	@Published private(set) var folderURL: URL?
-	@Published private(set) var filteredItems: [GalleryItem] = []
+	@Published private(set) var items: [GalleryItem] = [] // items to display
+	@Published private(set) var isEmpty = true
 
 	@Published private var allItems: [GalleryItem] = []
-	
+
+	enum Mode {
+		case viewer
+		case multipleSelection(selected: Set<GalleryItem>, hideSelected: Bool)
+	}
+
 	init() {
 		$folderURL
 			.compactMap { $0 }
@@ -27,10 +34,15 @@ class GalleryModel: ObservableObject {
 			.assign(to: &$allItems)
 
 		$allItems
-			.combineLatest($textFilter, $spellsFilter, filtered(items: searchText: spells:))
+			.map(\.isEmpty)
+			.assign(to: &$isEmpty)
+		
+		$allItems
+			.combineLatest($textFilter, $spellsFilter, filtered(items:searchText:spells:))
+			.combineLatest($mode, displayed(items:by:))
 			.subscribe(on: DispatchQueue.global())
 			.receive(on: DispatchQueue.main)
-			.assign(to: &$filteredItems)
+			.assign(to: &$items)
 	}
 }
 
@@ -48,6 +60,13 @@ extension GalleryModel {
 		try? FileManager.default.removeItem(at: item.url)
 		guard let index = allItems.firstIndex(of: item) else { return }
 		allItems.remove(at: index)
+		guard case let .multipleSelection(selected, hideSelected) = mode else { return }
+		mode = .multipleSelection(selected: selected.subtracting([item]), hideSelected: hideSelected)
+	}
+
+	func deleteSelectedItems() {
+		guard case let .multipleSelection(selected, _) = mode else { return }
+		deleteActual(items: selected)
 	}
 }
 
@@ -99,5 +118,27 @@ private extension GalleryModel {
 					|| item.originalPrompt.lowercased().contains(text) else { return false }
 			return true
 		}
+	}
+
+	func displayed(items: [GalleryItem], by mode: Mode) -> [GalleryItem] {
+		switch mode {
+		case .viewer, .multipleSelection(_, hideSelected: false):
+			return items
+		case let .multipleSelection(selected, true):
+			return items.filter { item in
+				!selected.contains(item)
+			}
+		}
+	}
+
+	func deleteActual(items: some Sequence<GalleryItem>) {
+		let deletedItems = items.compactMap { item in
+			(try? FileManager.default.removeItem(at: item.url)).flatMap { item }
+		}
+		allItems = allItems.filter { item in
+			!deletedItems.contains(item)
+		}
+		guard case let .multipleSelection(selected, hideSelected) = mode else { return }
+		mode = .multipleSelection(selected: selected.subtracting(deletedItems), hideSelected: hideSelected)
 	}
 }

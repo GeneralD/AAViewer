@@ -13,3 +13,5 @@
 "button.deleteImage" = "削除";
 "alert.title.confirmDeletion" = "ファイルを削除しますか？";
 "alert.button.commonYes" = "はい";
+"label.numberOfItems" = "%d項目";
+"label.numberOfSelectedItems" = "%d項目が選択中";
