@@ -9,8 +9,9 @@ import SwiftUI
 import TagKit
 
 struct TagListView: View {
+	@Environment(\.itemSelected) private var itemSelectedAction
+
 	private let tags: [String]
-	private var onTap: ((String) -> Void)? = nil
 
 	init(tags: some Sequence<String>) {
 		self.tags = .init(tags)
@@ -23,14 +24,25 @@ struct TagListView: View {
 				.background(Color(seed: tag))
 				.foregroundColor(.white)
 				.cornerRadius(32)
-				.onTapGesture { onTap?(tag) }
+				.onTapGesture { itemSelectedAction?(tag) }
 		}
 	}
+}
 
-	@inlinable func onOnTap(perform onTap: @escaping (String) -> Void) -> Self {
-		var copied = self
-		copied.onTap = onTap
-		return copied
+extension View {
+	func itemSelected(_ value: @escaping (String) -> Void) -> some View {
+		environment(\.itemSelected, value)
+	}
+}
+
+private struct ItemSelected: EnvironmentKey {
+	static var defaultValue: ((String) -> Void)? = nil
+}
+
+private extension EnvironmentValues {
+	var itemSelected: ((String) -> Void)? {
+		get { self[ItemSelected.self] }
+		set { self[ItemSelected.self] = newValue }
 	}
 }
 

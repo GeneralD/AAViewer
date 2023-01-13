@@ -9,9 +9,10 @@ import SFSafeSymbols
 import SwiftUI
 
 struct GalleryItemControlView: View {
+	@Environment(\.galleryItemControlAction) private var action
+
 	private let item: GalleryItem
 	private let excludeTags: any Sequence<String>
-	private var action: ((GalleryItemAction) -> Void)? = nil
 
 	@State private var alertDeleteFile = false
 
@@ -24,13 +25,10 @@ struct GalleryItemControlView: View {
 		VStack(alignment: .center, spacing: 8) {
 			Text(item.url.lastPathComponent)
 			Divider()
-			TagListView(tags: item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
-				guard !excludeTags.contains(phrase) else { return }
-				accum.append(phrase)
-			})
-			.onOnTap { tag in
-				action?(.select(tag: tag))
-			}
+			TagListView(tags: tags)
+				.itemSelected { tag in
+					action?(.select(tag: tag))
+				}
 			Divider()
 			HStack {
 				Button {
@@ -64,13 +62,7 @@ struct GalleryItemControlView: View {
 		}
 	}
 
-	@inlinable func onAction(perform action: @escaping (GalleryItemAction) -> Void) -> Self {
-		var copied = self
-		copied.action = action
-		return copied
-	}
-
-	enum GalleryItemAction {
+	enum Action {
 		case copyPrompt, previewFile, openFile, deleteFile, select(tag: String)
 	}
 }
@@ -82,5 +74,29 @@ private extension GalleryItemControlView {
 					 message: Text(path.removingPercentEncoding ?? path),
 					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes)) { action?(.deleteFile) },
 					 secondaryButton: .cancel())
+	}
+
+	var tags: [String] {
+		item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
+			guard !excludeTags.contains(phrase) else { return }
+			accum.append(phrase)
+		}
+	}
+}
+
+extension View {
+	func galleryItemControlAction(_ value: @escaping (GalleryItemControlView.Action) -> Void) -> some View {
+		environment(\.galleryItemControlAction, value)
+	}
+}
+
+private struct GalleryItemActionKey: EnvironmentKey {
+	static var defaultValue: ((GalleryItemControlView.Action) -> Void)? = nil
+}
+
+private extension EnvironmentValues {
+	var galleryItemControlAction: ((GalleryItemControlView.Action) -> Void)? {
+		get { self[GalleryItemActionKey.self] }
+		set { self[GalleryItemActionKey.self] = newValue }
 	}
 }

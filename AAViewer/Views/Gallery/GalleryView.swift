@@ -17,7 +17,7 @@ struct GalleryView: View {
 	var body: some View {
 		VStack {
 			TagListView(tags: galleryModel.spellsFilter)
-				.onOnTap { tag in galleryModel.spellsFilter.remove(tag) }
+				.itemSelected { tag in galleryModel.spellsFilter.remove(tag) }
 			Spacer(minLength: 0)
 			GalleryTableView()
 				.environmentObject(settingModel)

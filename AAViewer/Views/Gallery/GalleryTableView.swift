@@ -27,7 +27,6 @@ struct GalleryTableView: View {
 				HStack {
 					Image(systemSymbol: .folderFill)
 					Text(R.string.localizable.buttonOpenFolder)
-
 				}
 				.padding(.all, 16)
 			}
@@ -53,7 +52,7 @@ struct GalleryTableView: View {
 						}
 						.popover(isPresented: $popoverPresentedID == item.id) {
 							GalleryItemControlView(item: item, excludeTags: galleryModel.spellsFilter)
-								.onAction(perform: { action in
+								.galleryItemControlAction { action in
 									switch action {
 									case .copyPrompt:
 										let pasteboard = NSPasteboard.general
@@ -68,7 +67,7 @@ struct GalleryTableView: View {
 									case .select(let tag):
 										galleryModel.spellsFilter.insert(tag)
 									}
-								})
+								}
 								.frame(minWidth: 320)
 								.padding(.all, 16)
 						}
