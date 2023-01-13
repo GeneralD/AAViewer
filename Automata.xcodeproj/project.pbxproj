@@ -41,7 +41,7 @@
 		B38C633E2965CCFA001851FD /* GalleryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryTableView.swift; sourceTree = "<group>"; };
 		B38C63402965CD0A001851FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B38C63432965CD0A001851FD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B38C63452965CD0A001851FD /* AAViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AAViewer.entitlements; sourceTree = "<group>"; };
+		B38C63452965CD0A001851FD /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		B38C63502965D6D6001851FD /* GalleryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryModel.swift; sourceTree = "<group>"; };
 		B38C63552965EE66001851FD /* GalleryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItem.swift; sourceTree = "<group>"; };
 		B3A67774296674590028579C /* AppSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingModel.swift; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				B3F59125296E50C500B1479D /* Resources */,
-				B38C633B2965CCFA001851FD /* AAViewer */,
+				B38C633B2965CCFA001851FD /* Sources */,
 				B38C633A2965CCFA001851FD /* Products */,
 				B3F59138296E5A6900B1479D /* Frameworks */,
 			);
@@ -104,7 +104,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B38C633B2965CCFA001851FD /* AAViewer */ = {
+		B38C633B2965CCFA001851FD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				B33003A4296BF07D008704AA /* Deprecated */,
@@ -113,10 +113,10 @@
 				B38C634F2965D6D6001851FD /* Models */,
 				B38C633C2965CCFA001851FD /* MainApp.swift */,
 				B38C63402965CD0A001851FD /* Assets.xcassets */,
-				B38C63452965CD0A001851FD /* AAViewer.entitlements */,
+				B38C63452965CD0A001851FD /* App.entitlements */,
 				B38C63422965CD0A001851FD /* Preview Content */,
 			);
-			path = AAViewer;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		B38C63422965CD0A001851FD /* Preview Content */ = {
@@ -416,11 +416,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = AAViewer/AAViewer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AAViewer/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Sources/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Automata;
@@ -431,7 +431,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zyxw.AAViewer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zyxw.Automata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -444,11 +444,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = AAViewer/AAViewer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AAViewer/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Sources/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Automata;
@@ -459,7 +459,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zyxw.AAViewer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zyxw.Automata;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

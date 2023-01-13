@@ -1,11 +1,3 @@
-/* 
-  Localizable.strings
-  AAViewer
-
-  Created by Yumenosuke Koukata on 2023/01/11.
-  
-*/
-
 "button.openFolder" = "Open Folder";
 "button.copyPrompt" = "Copy Prompt";
 "button.preview" = "Preview";
