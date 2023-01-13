@@ -6,3 +6,4 @@
 - [x] show current URL on top
 - [ ] space key to quicklook
 - [x] FocusedValue not working
+- [ ] mark items as favorite

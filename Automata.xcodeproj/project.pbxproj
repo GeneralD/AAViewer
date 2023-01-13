@@ -36,7 +36,7 @@
 		B33003A7296C3FD7008704AA /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		B33003CC296C83B7008704AA /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		B33003CE296D326F008704AA /* GalleryItemControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryItemControlView.swift; sourceTree = "<group>"; };
-		B38C63392965CCFA001851FD /* AAViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B38C63392965CCFA001851FD /* Automata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Automata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38C633C2965CCFA001851FD /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		B38C633E2965CCFA001851FD /* GalleryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryTableView.swift; sourceTree = "<group>"; };
 		B38C63402965CD0A001851FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		B38C633A2965CCFA001851FD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B38C63392965CCFA001851FD /* AAViewer.app */,
+				B38C63392965CCFA001851FD /* Automata.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,9 +174,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B38C63382965CCFA001851FD /* AAViewer */ = {
+		B38C63382965CCFA001851FD /* Automata */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B38C63482965CD0A001851FD /* Build configuration list for PBXNativeTarget "AAViewer" */;
+			buildConfigurationList = B38C63482965CD0A001851FD /* Build configuration list for PBXNativeTarget "Automata" */;
 			buildPhases = (
 				B38C63352965CCFA001851FD /* Sources */,
 				B38C63362965CCFA001851FD /* Frameworks */,
@@ -187,7 +187,7 @@
 			dependencies = (
 				B3F5913A296E5A8A00B1479D /* PBXTargetDependency */,
 			);
-			name = AAViewer;
+			name = Automata;
 			packageProductDependencies = (
 				B38C63532965EB8E001851FD /* WaterfallGrid */,
 				B38C63582965F267001851FD /* Kingfisher */,
@@ -197,7 +197,7 @@
 				B3F59136296E5A2400B1479D /* RswiftLibrary */,
 			);
 			productName = AAViewer;
-			productReference = B38C63392965CCFA001851FD /* AAViewer.app */;
+			productReference = B38C63392965CCFA001851FD /* Automata.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B38C63342965CCFA001851FD /* Build configuration list for PBXProject "AAViewer" */;
+			buildConfigurationList = B38C63342965CCFA001851FD /* Build configuration list for PBXProject "Automata" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -237,7 +237,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B38C63382965CCFA001851FD /* AAViewer */,
+				B38C63382965CCFA001851FD /* Automata */,
 			);
 		};
 /* End PBXProject section */
@@ -423,7 +423,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"AAViewer/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI Art Viewer";
+				INFOPLIST_KEY_CFBundleDisplayName = Automata;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -451,7 +451,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"AAViewer/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "AI Art Viewer";
+				INFOPLIST_KEY_CFBundleDisplayName = Automata;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -469,7 +469,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B38C63342965CCFA001851FD /* Build configuration list for PBXProject "AAViewer" */ = {
+		B38C63342965CCFA001851FD /* Build configuration list for PBXProject "Automata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B38C63462965CD0A001851FD /* Debug */,
@@ -478,7 +478,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B38C63482965CD0A001851FD /* Build configuration list for PBXNativeTarget "AAViewer" */ = {
+		B38C63482965CD0A001851FD /* Build configuration list for PBXNativeTarget "Automata" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B38C63492965CD0A001851FD /* Debug */,
