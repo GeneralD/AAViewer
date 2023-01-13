@@ -29,7 +29,15 @@ class GalleryModel: ObservableObject {
 	init() {
 		$folderURL
 			.compactMap { $0 }
-			.compactMap(loadGalleryItems(from:))
+			.compactMap(compatibleFileURLs(parentDirectory:))
+			.map { urls in
+				urls.chunked(by: 50) // load 50 at a time
+					.publisher
+					.delay(for: 1, scheduler: DispatchQueue.global())
+					.manyMap(item(from:))
+					.scan([GalleryItem](), +)
+			}
+			.switchToLatest()
 			.assign(to: &$allItems)
 
 		$folderURL
@@ -79,39 +87,6 @@ private extension GalleryModel {
 		spellsFilter = []
 	}
 
-	func loadGalleryItems(from url: URL) -> [GalleryItem]? {
-		let manager = FileManager.default
-		let imageExtensions = ["jpg", "jpeg", "png", "gif"]
-		guard let fileUrls = try? manager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) else { return nil }
-		return fileUrls
-			.filter { url in imageExtensions.contains(url.pathExtension.lowercased()) }
-			.map { url in
-				let prompt = prompt(from: url)
-				return GalleryItem(url: url, spells: prompt.flatMap(spells(from:)) ?? [], originalPrompt: prompt ?? "")
-			}
-	}
-
-	func prompt(from url: URL) -> String? {
-		guard let image = CIImage(contentsOf: url),
-			  let pngProps = image.properties[kCGImagePropertyPNGDictionary as String] as? [String : Any],
-			  let description = pngProps[kCGImagePropertyPNGDescription as String] as? String else { return nil }
-		return description
-	}
-
-	func spells(from prompt: String) -> [Spell] {
-		prompt
-			.split(separator: ",")
-			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-			.filter { !$0.isEmpty }
-			.map(Spell.from)
-			.reduce(into: []) { accum, spell in
-				if let index = accum.map(\.phrase).firstIndex(of: spell.phrase), accum[index].enhanced < spell.enhanced {
-					accum.remove(at: index)
-				}
-				accum.append(spell)
-			}
-	}
-
 	func filtered(items: [GalleryItem], searchText: String, spells: Set<String>) -> [GalleryItem] {
 		return items.filter { item in
 			guard spells.isSubset(of: item.spells.map(\.phrase)) else { return false }
@@ -144,4 +119,38 @@ private extension GalleryModel {
 		guard case let .multipleSelection(selected, hideSelected) = mode else { return }
 		mode = .multipleSelection(selected: selected.subtracting(deletedItems), hideSelected: hideSelected)
 	}
+}
+
+private func compatibleFileURLs(parentDirectory url: URL) -> [URL]? {
+	guard let fileUrls = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil) else { return nil }
+	let extensions = ["jpg", "jpeg", "png", "gif"]
+	return fileUrls.filter { url in
+		extensions.contains(url.pathExtension.lowercased())
+	}
+}
+
+private func item(from url: URL) -> GalleryItem {
+	let prompt = prompt(from: url)
+	return GalleryItem(url: url, spells: prompt.flatMap(spells(from:)) ?? [], originalPrompt: prompt ?? "")
+}
+
+private func prompt(from url: URL) -> String? {
+	guard let image = CIImage(contentsOf: url),
+		  let pngProps = image.properties[kCGImagePropertyPNGDictionary as String] as? [String : Any],
+		  let description = pngProps[kCGImagePropertyPNGDescription as String] as? String else { return nil }
+	return description
+}
+
+private func spells(from prompt: String) -> [Spell] {
+	prompt
+		.split(separator: ",")
+		.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+		.filter { !$0.isEmpty }
+		.map(Spell.from)
+		.reduce(into: []) { accum, spell in
+			if let index = accum.map(\.phrase).firstIndex(of: spell.phrase), accum[index].enhanced < spell.enhanced {
+				accum.remove(at: index)
+			}
+			accum.append(spell)
+		}
 }
