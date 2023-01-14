@@ -7,7 +7,7 @@
 import Combine
 
 extension Publisher {
-	public func manyMap<T>(_ transform: @escaping (Output.Element) -> T) -> Publishers.Map<Self, [T]> where Output: Sequence {
+	func manyMap<T>(_ transform: @escaping (Output.Element) -> T) -> Publishers.Map<Self, [T]> where Output: Sequence {
 		map { $0.map(transform) }
 	}
 }
