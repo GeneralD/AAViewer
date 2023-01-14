@@ -1,10 +1,57 @@
-"button.openFolder" = "Open Folder";
-"button.copyPrompt" = "Copy Prompt";
-"button.preview" = "Preview";
-"button.openImage" = "Open Image";
-"button.deleteImage" = "Delete Image";
-"alert.title.confirmDeletion" = "Do you want to delete the file immediately?";
-"alert.title.confirmDeletionSelectedImages" = "Do you want to delete the selected %d files immediately?";
+
+
 "alert.button.commonYes" = "Yes";
+
+
+"alert.title.confirmDeletion" = "Do you want to delete the file immediately?";
+
+
+"alert.title.confirmDeletionSelectedImages" = "Do you want to delete the selected %d files immediately?";
+
+
+"button.copyPrompt" = "Copy Prompt";
+
+
+"button.deleteImage" = "Delete Image";
+
+
+"button.openFolder" = "Open Folder";
+
+
+"button.openImage" = "Open Image";
+
+
+"button.preview" = "Preview";
+
+
 "label.numberOfItems" = "%d items";
+
+
 "label.numberOfSelectedItems" = "%d items selected";
+
+
+"menu.button.find" = "Find";
+
+
+"menu.button.open" = "Open...";
+
+
+"menu.button.scrollDirectionVertical" = "Vertical";
+
+
+"menu.button.zoomIn" = "Zoom In";
+
+
+"menu.button.zoomOut" = "Zoom Out";
+
+
+"menu.button.zoomReset" = "Reset";
+
+
+"menu.label.scrollDirection" = "Scroll Direction";
+
+
+"menu.label.scrollDirectionHorizontal" = "Horizontal";
+
+
+"menu.label.zoom" = "Zoom (Columns: %d)";

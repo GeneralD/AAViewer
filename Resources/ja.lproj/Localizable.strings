@@ -1,10 +1,57 @@
-"button.openFolder" = "フォルダを開く";
-"button.copyPrompt" = "呪文をコピー";
-"button.preview" = "プレビュー";
-"button.openImage" = "開く";
-"button.deleteImage" = "削除";
-"alert.title.confirmDeletion" = "ファイルを削除しますか？";
-"alert.title.confirmDeletionSelectedImages" = "選択した%d項目を削除しますか？";
+
+
 "alert.button.commonYes" = "はい";
+
+
+"alert.title.confirmDeletion" = "ファイルを削除しますか？";
+
+
+"alert.title.confirmDeletionSelectedImages" = "選択した%d項目を削除しますか？";
+
+
+"button.copyPrompt" = "呪文をコピー";
+
+
+"button.deleteImage" = "削除";
+
+
+"button.openFolder" = "フォルダを開く";
+
+
+"button.openImage" = "開く";
+
+
+"button.preview" = "プレビュー";
+
+
 "label.numberOfItems" = "%d項目";
+
+
 "label.numberOfSelectedItems" = "%d項目が選択中";
+
+
+"menu.button.find" = "検索";
+
+
+"menu.button.open" = "開く";
+
+
+"menu.button.scrollDirectionVertical" = "縦";
+
+
+"menu.button.zoomIn" = "拡大";
+
+
+"menu.button.zoomOut" = "縮小";
+
+
+"menu.button.zoomReset" = "初期値に戻す";
+
+
+"menu.label.scrollDirection" = "スクロール方向";
+
+
+"menu.label.scrollDirectionHorizontal" = "横";
+
+
+"menu.label.zoom" = "ズーム (現在の列数: %d)";

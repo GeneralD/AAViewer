@@ -60,7 +60,7 @@ private extension GalleryView {
 			}
 		}
 		if !galleryModel.items.isEmpty {
-			Text(R.string.localizable.labelNumberOfItems(galleryModel.items.count))
+			Text(R.string.localizable.labelNumberOfItems, galleryModel.items.count)
 		}
 		Spacer()
 
@@ -132,14 +132,14 @@ private extension GalleryView {
 					Image(systemSymbol: .trash)
 						.foregroundColor(.red)
 				}
-				Text(R.string.localizable.labelNumberOfSelectedItems(selected.count))
+				Text(R.string.localizable.labelNumberOfSelectedItems, selected.count)
 			}
 		}
 	}
 
 	var alertDeleteSelectedFiles: Alert {
 		guard case let .multipleSelection(selected, _) = galleryModel.mode else { return .init(title: .init(.init())) }
-		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletionSelectedImages(selected.count)),
+		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletionSelectedImages, selected.count),
 			  primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: galleryModel.deleteSelectedItems),
 			  secondaryButton: .cancel())
 	}
