@@ -25,9 +25,9 @@ struct GalleryItemControlView: View {
 			Text(item.url.lastPathComponent)
 			Divider()
 			TagListView(tags: tags)
-				.itemSelected { tag in
-					action?(.select(tag: tag))
-				}
+					.itemSelected { tag in
+						action?(.select(tag: tag))
+					}
 			Divider()
 			HStack {
 				Button {
@@ -54,9 +54,9 @@ struct GalleryItemControlView: View {
 					Image(systemSymbol: .trash)
 					Text(R.string.localizable.buttonDeleteImage)
 				}
-				.alert(isPresented: $alertDeleteFile) {
-					alert(deleteItem: item)
-				}
+						.alert(isPresented: $alertDeleteFile) {
+							alert(deleteItem: item)
+						}
 			}
 		}
 	}
@@ -70,9 +70,9 @@ private extension GalleryItemControlView {
 	func alert(deleteItem: GalleryItem) -> Alert {
 		let path = item.url.absoluteString
 		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletion),
-					 message: Text(path.removingPercentEncoding ?? path),
-					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes)) { action?(.deleteFile) },
-					 secondaryButton: .cancel())
+		             message: Text(path.removingPercentEncoding ?? path),
+		             primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes)) { action?(.deleteFile) },
+		             secondaryButton: .cancel())
 	}
 
 	var tags: [String] {

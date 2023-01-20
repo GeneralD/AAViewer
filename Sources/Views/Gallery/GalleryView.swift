@@ -16,25 +16,25 @@ struct GalleryView: View {
 	var body: some View {
 		VStack {
 			TagListView(tags: galleryModel.spellsFilter)
-				.itemSelected { tag in galleryModel.spellsFilter.remove(tag) }
+					.itemSelected { tag in galleryModel.spellsFilter.remove(tag) }
 			Spacer(minLength: 0)
 			GalleryTableView()
-				.environmentObject(settingModel)
-				.environmentObject(galleryModel)
-				.searchable(text: $galleryModel.textFilter, placement: .toolbar)
-				.toolbar { toolbar }
-				.alert(isPresented: $isPresentedAlertDeleteSelectedFiles) { alertDeleteSelectedFiles }
+					.environmentObject(settingModel)
+					.environmentObject(galleryModel)
+					.searchable(text: $galleryModel.textFilter, placement: .toolbar)
+					.toolbar { toolbar }
+					.alert(isPresented: $isPresentedAlertDeleteSelectedFiles) { alertDeleteSelectedFiles }
 			Spacer(minLength: 0)
 		}
-		.focusedSceneObject(galleryModel)
+			.focusedSceneObject(galleryModel)
 	}
 }
 
 private extension GalleryView {
 	@ViewBuilder
 	var toolbar: some View {
-		Group {
-			if !galleryModel.spellsFilter.isEmpty {
+		if !galleryModel.spellsFilter.isEmpty {
+			Group {
 				Button {
 					galleryModel.spellsFilter.removeAll()
 				} label: {
@@ -80,68 +80,68 @@ private extension GalleryView {
 				Image(systemSymbol: .minusMagnifyingglass)
 			}
 			switch settingModel.galleryScrollAxis {
-			case .vertical:
-				Button {
-					settingModel.galleryScrollAxis = .horizontal
-				} label: {
-					Image(systemSymbol: .alignHorizontalLeft)
-				}
-			case .horizontal:
-				Button {
-					settingModel.galleryScrollAxis = .vertical
-				} label: {
-					Image(systemSymbol: .alignVerticalTop)
-				}
-			default:
-				Divider()
+				case .vertical:
+					Button {
+						settingModel.galleryScrollAxis = .horizontal
+					} label: {
+						Image(systemSymbol: .alignHorizontalLeft)
+					}
+				case .horizontal:
+					Button {
+						settingModel.galleryScrollAxis = .vertical
+					} label: {
+						Image(systemSymbol: .alignVerticalTop)
+					}
+				default:
+					Divider()
 			}
 			Spacer()
 		}
 
 		Group {
 			switch galleryModel.mode {
-			case .viewer:
-				Button {
-					galleryModel.mode = .multipleSelection(selected: [], hideSelected: false)
-				} label: {
-					Image(systemSymbol: .checkmark)
-				}
-			case let .multipleSelection(selected, hideSelected):
-				Button {
-					galleryModel.mode = .viewer
-				} label: {
-					Image(systemSymbol: .eye)
-				}
-				if !selected.isSuperset(of: galleryModel.items) {
+				case .viewer:
 					Button {
-						galleryModel.mode = .multipleSelection(selected: selected.union(galleryModel.items), hideSelected: hideSelected)
+						galleryModel.mode = .multipleSelection(selected: [], hideSelected: false)
 					} label: {
-						Image(systemSymbol: .checkmarkCircleFill)
-							.foregroundColor(.blue)
+						Image(systemSymbol: .checkmark)
 					}
-				}
-				if !hideSelected, !selected.isDisjoint(with: galleryModel.items) {
+				case let .multipleSelection(selected, hideSelected):
 					Button {
-						galleryModel.mode = .multipleSelection(selected: selected.subtracting(galleryModel.items), hideSelected: hideSelected)
+						galleryModel.mode = .viewer
 					} label: {
-						Image(systemSymbol: .checkmarkCircle)
-							.foregroundColor(.blue)
+						Image(systemSymbol: .eye)
 					}
-				}
-				Button {
-					galleryModel.mode = .multipleSelection(selected: selected, hideSelected: !hideSelected)
-				} label: {
-					Image(systemSymbol: hideSelected ? .appBadgeCheckmark : .squareDotted)
-				}
-				if !selected.isEmpty {
+					if !selected.isSuperset(of: galleryModel.items) {
+						Button {
+							galleryModel.mode = .multipleSelection(selected: selected.union(galleryModel.items), hideSelected: hideSelected)
+						} label: {
+							Image(systemSymbol: .checkmarkCircleFill)
+									.foregroundColor(.blue)
+						}
+					}
+					if !hideSelected, !selected.isDisjoint(with: galleryModel.items) {
+						Button {
+							galleryModel.mode = .multipleSelection(selected: selected.subtracting(galleryModel.items), hideSelected: hideSelected)
+						} label: {
+							Image(systemSymbol: .checkmarkCircle)
+									.foregroundColor(.blue)
+						}
+					}
 					Button {
-						isPresentedAlertDeleteSelectedFiles = true
+						galleryModel.mode = .multipleSelection(selected: selected, hideSelected: !hideSelected)
 					} label: {
-						Image(systemSymbol: .trash)
-							.foregroundColor(.red)
+						Image(systemSymbol: hideSelected ? .appBadgeCheckmark : .squareDotted)
 					}
-					Text(R.string.localizable.labelNumberOfSelectedItems, selected.count)
-				}
+					if !selected.isEmpty {
+						Button {
+							isPresentedAlertDeleteSelectedFiles = true
+						} label: {
+							Image(systemSymbol: .trash)
+									.foregroundColor(.red)
+						}
+						Text(R.string.localizable.labelNumberOfSelectedItems, selected.count)
+					}
 			}
 			Spacer()
 		}
@@ -150,14 +150,14 @@ private extension GalleryView {
 	var alertDeleteSelectedFiles: Alert {
 		guard case let .multipleSelection(selected, _) = galleryModel.mode else { return .init(title: .init(.init())) }
 		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletionSelectedImages, selected.count),
-					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: galleryModel.deleteSelectedItems),
-					 secondaryButton: .cancel())
+		             primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: galleryModel.deleteSelectedItems),
+		             secondaryButton: .cancel())
 	}
 }
 
 struct GalleryView_Previews: PreviewProvider {
 	static var previews: some View {
 		GalleryView()
-			.environmentObject(AppSettingModel())
+				.environmentObject(AppSettingModel())
 	}
 }

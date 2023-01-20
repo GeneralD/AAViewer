@@ -19,11 +19,11 @@ extension Color {
 		let maxSafeInteger = 9_007_199_254_740_991 / seed2
 
 		let bkdrHash = seed.compactMap { String($0).unicodeScalars.first?.value }
-			.reduce(into: CGFloat(0)) { accum, scl in
-				if accum > maxSafeInteger { accum /= seed2 }
-				accum *= seed1
-				accum += CGFloat(scl)
-			}
+				.reduce(into: CGFloat(0)) { accum, scl in
+					if accum > maxSafeInteger { accum /= seed2 }
+					accum *= seed1
+					accum += CGFloat(scl)
+				}
 
 		let hue = bkdrHash.truncatingRemainder(dividingBy: full - 1.0) / full
 		let saturation = values[Int(bkdrHash.truncatingRemainder(dividingBy: CGFloat(values.count)))]

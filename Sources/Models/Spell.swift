@@ -34,6 +34,7 @@ extension Spell {
 			}
 			return base
 		}
+
 		return reduce(.init(phrase: str, enhanced: .zero))
 	}
 }

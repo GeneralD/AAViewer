@@ -9,8 +9,8 @@ import AppKit
 extension NSApplication {
 	static var searchToolbar: NSSearchToolbarItem? {
 		guard let toolbarItems = shared.keyWindow?.toolbar?.items,
-			  let item = toolbarItems.first(where: { $0.itemIdentifier.rawValue == "com.apple.SwiftUI.search" }),
-			  let search = item as? NSSearchToolbarItem else { return nil }
+		      let item = toolbarItems.first(where: { $0.itemIdentifier.rawValue == "com.apple.SwiftUI.search" }),
+		      let search = item as? NSSearchToolbarItem else { return nil }
 		return search
 	}
 }

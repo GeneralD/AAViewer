@@ -1,4 +1,5 @@
 ## TODO
+
 - [ ] userdefaults not kept
 - [x] improve prompt ui
 - [x] click prompt to filter

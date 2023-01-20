@@ -28,32 +28,32 @@ class GalleryModel: ObservableObject {
 
 	init() {
 		$folderURL
-			.compactMap { $0 }
-			.compactMap(compatibleFileURLs(parentDirectory:))
-			.map { urls in
-				urls.chunked(by: 50) // load 50 at a time
-					.publisher
-					.delay(for: 1, scheduler: DispatchQueue.global())
-					.manyMap(item(from:))
-					.scan([GalleryItem](), +)
-			}
-			.switchToLatest()
-			.assign(to: &$allItems)
+				.compactMap { $0 }
+				.compactMap(compatibleFileURLs(parentDirectory:))
+				.map { urls in
+					urls.chunked(by: 50) // load 50 at a time
+							.publisher
+							.delay(for: 1, scheduler: DispatchQueue.global())
+							.manyMap(item(from:))
+							.scan([GalleryItem](), +)
+				}
+				.switchToLatest()
+				.assign(to: &$allItems)
 
 		$folderURL
-			.map { _ in .viewer }
-			.assign(to: &$mode)
+				.map { _ in .viewer }
+				.assign(to: &$mode)
 
 		$allItems
-			.map(\.isEmpty)
-			.assign(to: &$isEmpty)
-		
+				.map(\.isEmpty)
+				.assign(to: &$isEmpty)
+
 		$allItems
-			.combineLatest($textFilter, $spellsFilter, filtered(items:searchText:spells:))
-			.combineLatest($mode, displayed(items:by:))
-			.subscribe(on: DispatchQueue.global())
-			.receive(on: DispatchQueue.main)
-			.assign(to: &$items)
+				.combineLatest($textFilter, $spellsFilter, filtered(items:searchText:spells:))
+				.combineLatest($mode, displayed(items:by:))
+				.subscribe(on: DispatchQueue.global())
+				.receive(on: DispatchQueue.main)
+				.assign(to: &$items)
 	}
 }
 
@@ -93,19 +93,19 @@ private extension GalleryModel {
 			guard !searchText.isEmpty else { return true }
 			let text = searchText.lowercased()
 			guard item.url.lastPathComponent.lowercased().contains(text)
-					|| item.originalPrompt.lowercased().contains(text) else { return false }
+			      || item.originalPrompt.lowercased().contains(text) else { return false }
 			return true
 		}
 	}
 
 	func displayed(items: [GalleryItem], by mode: Mode) -> [GalleryItem] {
 		switch mode {
-		case .viewer, .multipleSelection(_, hideSelected: false):
-			return items
-		case let .multipleSelection(selected, true):
-			return items.filter { item in
-				!selected.contains(item)
-			}
+			case .viewer, .multipleSelection(_, hideSelected: false):
+				return items
+			case let .multipleSelection(selected, true):
+				return items.filter { item in
+					!selected.contains(item)
+				}
 		}
 	}
 
@@ -136,21 +136,21 @@ private func item(from url: URL) -> GalleryItem {
 
 private func prompt(from url: URL) -> String? {
 	guard let image = CIImage(contentsOf: url),
-		  let pngProps = image.properties[kCGImagePropertyPNGDictionary as String] as? [String : Any],
-		  let description = pngProps[kCGImagePropertyPNGDescription as String] as? String else { return nil }
+	      let pngProps = image.properties[kCGImagePropertyPNGDictionary as String] as? [String: Any],
+	      let description = pngProps[kCGImagePropertyPNGDescription as String] as? String else { return nil }
 	return description
 }
 
 private func spells(from prompt: String) -> [Spell] {
 	prompt
-		.split(separator: ",")
-		.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-		.filter { !$0.isEmpty }
-		.map(Spell.from)
-		.reduce(into: []) { accum, spell in
-			if let index = accum.map(\.phrase).firstIndex(of: spell.phrase), accum[index].enhanced < spell.enhanced {
-				accum.remove(at: index)
+			.split(separator: ",")
+			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+			.filter { !$0.isEmpty }
+			.map(Spell.from)
+			.reduce(into: []) { accum, spell in
+				if let index = accum.map(\.phrase).firstIndex(of: spell.phrase), accum[index].enhanced < spell.enhanced {
+					accum.remove(at: index)
+				}
+				accum.append(spell)
 			}
-			accum.append(spell)
-		}
 }
