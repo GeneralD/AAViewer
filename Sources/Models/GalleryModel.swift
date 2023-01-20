@@ -43,7 +43,7 @@ class GalleryModel: ObservableObject {
 		
 		$folderURL
 			.removeDuplicates()
-			.map { _ in .viewer }
+			.transform(to: .viewer)
 			.assign(to: &$mode)
 		
 		$allItems
