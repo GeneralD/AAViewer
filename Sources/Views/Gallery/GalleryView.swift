@@ -16,17 +16,17 @@ struct GalleryView: View {
 	var body: some View {
 		VStack {
 			TagListView(tags: galleryModel.spellsFilter)
-					.itemSelected { tag in galleryModel.spellsFilter.remove(tag) }
+				.itemSelected { tag in galleryModel.spellsFilter.remove(tag) }
 			Spacer(minLength: 0)
 			GalleryTableView()
-					.environmentObject(settingModel)
-					.environmentObject(galleryModel)
-					.searchable(text: $galleryModel.textFilter, placement: .toolbar)
-					.toolbar { toolbar }
-					.alert(isPresented: $isPresentedAlertDeleteSelectedFiles) { alertDeleteSelectedFiles }
+				.environmentObject(settingModel)
+				.environmentObject(galleryModel)
+				.searchable(text: $galleryModel.textFilter, placement: .toolbar)
+				.toolbar { toolbar }
+				.alert(isPresented: $isPresentedAlertDeleteSelectedFiles) { alertDeleteSelectedFiles }
 			Spacer(minLength: 0)
 		}
-			.focusedSceneObject(galleryModel)
+		.focusedSceneObject(galleryModel)
 	}
 }
 
@@ -117,7 +117,7 @@ private extension GalleryView {
 							galleryModel.mode = .multipleSelection(selected: selected.union(galleryModel.items), hideSelected: hideSelected)
 						} label: {
 							Image(systemSymbol: .checkmarkCircleFill)
-									.foregroundColor(.blue)
+								.foregroundColor(.blue)
 						}
 					}
 					if !hideSelected, !selected.isDisjoint(with: galleryModel.items) {
@@ -125,7 +125,7 @@ private extension GalleryView {
 							galleryModel.mode = .multipleSelection(selected: selected.subtracting(galleryModel.items), hideSelected: hideSelected)
 						} label: {
 							Image(systemSymbol: .checkmarkCircle)
-									.foregroundColor(.blue)
+								.foregroundColor(.blue)
 						}
 					}
 					Button {
@@ -138,7 +138,7 @@ private extension GalleryView {
 							isPresentedAlertDeleteSelectedFiles = true
 						} label: {
 							Image(systemSymbol: .trash)
-									.foregroundColor(.red)
+								.foregroundColor(.red)
 						}
 						Text(R.string.localizable.labelNumberOfSelectedItems, selected.count)
 					}
@@ -150,14 +150,14 @@ private extension GalleryView {
 	var alertDeleteSelectedFiles: Alert {
 		guard case let .multipleSelection(selected, _) = galleryModel.mode else { return .init(title: .init(.init())) }
 		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletionSelectedImages, selected.count),
-		             primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: galleryModel.deleteSelectedItems),
-		             secondaryButton: .cancel())
+					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes), action: galleryModel.deleteSelectedItems),
+					 secondaryButton: .cancel())
 	}
 }
 
 struct GalleryView_Previews: PreviewProvider {
 	static var previews: some View {
 		GalleryView()
-				.environmentObject(AppSettingModel())
+			.environmentObject(AppSettingModel())
 	}
 }

@@ -19,11 +19,11 @@ struct TagListView: View {
 	var body: some View {
 		TagList(tags: .init(tags)) { tag in
 			Text(tag)
-					.padding(.all, 4)
-					.background(Color(seed: tag))
-					.foregroundColor(.white)
-					.cornerRadius(32)
-					.onTapGesture { itemSelectedAction?(tag) }
+				.padding(.all, 4)
+				.background(Color(seed: tag))
+				.foregroundColor(.white)
+				.cornerRadius(32)
+				.onTapGesture { itemSelectedAction?(tag) }
 		}
 	}
 }
@@ -48,6 +48,6 @@ private extension EnvironmentValues {
 struct TagListView_Previews: PreviewProvider {
 	static var previews: some View {
 		TagListView(tags: ["alice", "bob", "carol", "charlie", "dave", "ellen", "frank"].map(\.capitalized))
-				.frame(height: 32)
+			.frame(height: 32)
 	}
 }

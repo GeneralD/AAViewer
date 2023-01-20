@@ -9,25 +9,25 @@ import SwiftUI
 
 struct GalleryItemControlView: View {
 	@Environment(\.galleryItemControlAction) private var action
-
+	
 	private let item: GalleryItem
 	private let excludeTags: any Sequence<String>
-
+	
 	@State private var alertDeleteFile = false
-
+	
 	init(item: GalleryItem, excludeTags: any Sequence<String>) {
 		self.item = item
 		self.excludeTags = excludeTags
 	}
-
+	
 	var body: some View {
 		VStack(alignment: .center, spacing: 8) {
 			Text(item.url.lastPathComponent)
 			Divider()
 			TagListView(tags: tags)
-					.itemSelected { tag in
-						action?(.select(tag: tag))
-					}
+				.itemSelected { tag in
+					action?(.select(tag: tag))
+				}
 			Divider()
 			HStack {
 				Button {
@@ -54,13 +54,13 @@ struct GalleryItemControlView: View {
 					Image(systemSymbol: .trash)
 					Text(R.string.localizable.buttonDeleteImage)
 				}
-						.alert(isPresented: $alertDeleteFile) {
-							alert(deleteItem: item)
-						}
+				.alert(isPresented: $alertDeleteFile) {
+					alert(deleteItem: item)
+				}
 			}
 		}
 	}
-
+	
 	enum Action {
 		case copyPrompt, previewFile, openFile, deleteFile, select(tag: String)
 	}
@@ -70,11 +70,11 @@ private extension GalleryItemControlView {
 	func alert(deleteItem: GalleryItem) -> Alert {
 		let path = item.url.absoluteString
 		return Alert(title: Text(R.string.localizable.alertTitleConfirmDeletion),
-		             message: Text(path.removingPercentEncoding ?? path),
-		             primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes)) { action?(.deleteFile) },
-		             secondaryButton: .cancel())
+					 message: Text(path.removingPercentEncoding ?? path),
+					 primaryButton: .destructive(Text(R.string.localizable.alertButtonCommonYes)) { action?(.deleteFile) },
+					 secondaryButton: .cancel())
 	}
-
+	
 	var tags: [String] {
 		item.spells.map(\.phrase).reduce(into: []) { accum, phrase in
 			guard !excludeTags.contains(phrase) else { return }
