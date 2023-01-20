@@ -31,16 +31,18 @@ class GalleryModel: ObservableObject {
 			.compactMap { $0 }
 			.compactMap(compatibleFileURLs(parentDirectory:))
 			.map { urls in
-				urls.chunked(by: 50) // load 50 at a time
+				urls.chunked(by: 50)
 					.publisher
-					.delay(for: 1, scheduler: DispatchQueue.global())
+					.subscribe(on: DispatchQueue.global())
 					.manyMap(item(from:))
 					.scan([GalleryItem](), +)
 			}
 			.switchToLatest()
+			.subscribe(on: DispatchQueue.global())
 			.assign(to: &$allItems)
 		
 		$folderURL
+			.removeDuplicates()
 			.map { _ in .viewer }
 			.assign(to: &$mode)
 		
@@ -51,8 +53,6 @@ class GalleryModel: ObservableObject {
 		$allItems
 			.combineLatest($textFilter, $spellsFilter, filtered(items:searchText:spells:))
 			.combineLatest($mode, displayed(items:by:))
-			.subscribe(on: DispatchQueue.global())
-			.receive(on: DispatchQueue.main)
 			.assign(to: &$items)
 	}
 }
