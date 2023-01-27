@@ -53,13 +53,11 @@ struct GalleryTableView: View {
 								.galleryItemControlAction { action in
 									switch action {
 										case .copyPrompt:
-											let pasteboard = NSPasteboard.general
-											pasteboard.clearContents()
-											pasteboard.setString(item.originalPrompt, forType: .string)
+											galleryModel.copyPrompt(of: item)
 										case .previewFile:
 											previewURL = item.url
 										case .openFile:
-											NSWorkspace.shared.open(item.url)
+											galleryModel.openFile(item: item)
 										case .deleteFile:
 											galleryModel.deleteActual(item: item)
 										case .select(let tag):

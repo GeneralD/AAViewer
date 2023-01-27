@@ -79,6 +79,16 @@ extension GalleryModel {
 		guard case let .multipleSelection(selected, _) = mode else { return }
 		deleteActual(items: selected)
 	}
+
+	func copyPrompt(of item: GalleryItem) {
+		let pasteboard = NSPasteboard.general
+		pasteboard.clearContents()
+		pasteboard.setString(item.originalPrompt, forType: .string)
+	}
+
+	func openFile(item: GalleryItem) {
+		NSWorkspace.shared.open(item.url)
+	}
 }
 
 private extension GalleryModel {
