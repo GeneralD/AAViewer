@@ -535,7 +535,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 7.7.0;
 			};
 		};
 		B3F59115296E4AA000B1479D /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
